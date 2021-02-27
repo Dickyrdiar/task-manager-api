@@ -1,0 +1,16 @@
+class User < ApplicationRecord
+  # uuid 
+  before_create :set_uuid 
+  def set_uuid 
+    self.id = SecureRandom.uuid 
+  end
+
+  # database relation 
+  has_many :projects
+  has_many :authentication_tokens
+
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :invitable, :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable, :trackable
+end
