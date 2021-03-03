@@ -8,7 +8,7 @@ class User < ApplicationRecord
   # database relation 
   has_many :projects
   has_many :authentication_tokens
-  has_many :messages
+  has_and_belongs_to_many :messages, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
