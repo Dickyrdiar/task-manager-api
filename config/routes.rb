@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :projects  
       resources :usersinvitations, only: %i[edit update create]
+      resources :groups
     end  
 
     namespace :auth do
