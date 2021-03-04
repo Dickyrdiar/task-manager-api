@@ -5,5 +5,9 @@ class Message < ApplicationRecord
     end 
 
     # database relation 
+    has_and_belongs_to_many :users
+    belongs_to :sender
 
+    # testing 
+    validates_presence_of :text
 end

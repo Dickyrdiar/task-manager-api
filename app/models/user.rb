@@ -5,6 +5,8 @@ class User < ApplicationRecord
     self.id = SecureRandom.uuid 
   end
 
+  validates_presence_of :email, :password 
+
   # database relation 
   has_many :projects
   has_many :authentication_tokens

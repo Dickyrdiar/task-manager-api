@@ -4,4 +4,7 @@ class Group < ApplicationRecord
     def set_uuid
         self.id  = SecureRandom.uuid  
     end 
+
+    # validates 
+    validates_presence_of :name, :desc
 end

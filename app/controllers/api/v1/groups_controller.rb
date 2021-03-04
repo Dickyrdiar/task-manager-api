@@ -23,9 +23,24 @@ class Api::V1::GroupsController < ApplicationController
     end 
 
     def update 
+        @group = Group.find(params[:id])
+        if @group.save(group_params)
+            render json: {
+                messages: 'update success', 
+                is_message: true, 
+                data: { group: @group }
+            }, status: :ok 
+        else
+            render json: {
+                messages: 'update failed', 
+                is_messages: false, 
+                data: {}
+            }, status: :failed 
+        end    
     end 
 
     def destroy 
+        @group.destroy 
     end 
 
     private 
