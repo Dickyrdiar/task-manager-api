@@ -1,4 +1,6 @@
 class Api::V1::UsersInvitationsController < ApplicationController
+    before_action: configure_permited_parameters
+
     def create
         # code here  
     end
@@ -19,4 +21,9 @@ class Api::V1::UsersInvitationsController < ApplicationController
             end  
         end  
     end 
+
+    pruvate 
+
+    def configure_permited_parameters
+    end  
 end
