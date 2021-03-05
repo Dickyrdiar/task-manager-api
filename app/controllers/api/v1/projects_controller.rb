@@ -8,6 +8,7 @@ class Api::V1::ProjectsController < ApplicationController
     end
 
     def show 
+        render json: @project.as_json
     end 
     
     def create

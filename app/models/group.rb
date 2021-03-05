@@ -7,4 +7,7 @@ class Group < ApplicationRecord
 
     # validates 
     validates_presence_of :name, :desc
+
+    # database relation 
+    belongs_to :users
 end
