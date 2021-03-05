@@ -9,6 +9,6 @@ class Project < ApplicationRecord
     validates_presence_of :name, :desc, :date_begining
 
     # database relation 
-    has_and_belongs_to_many :user, optional: true 
-    has_many :messages, dependent: :destroy 
+    has_many :messages, dependent: :destroy  
+    has_and_belongs_to_many :users
 end
