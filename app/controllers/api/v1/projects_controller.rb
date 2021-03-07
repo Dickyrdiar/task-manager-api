@@ -1,5 +1,4 @@
 class Api::V1::ProjectsController < ApplicationController
-    # before_action :set_project, only: [:index, :create, :update, :edit, :destroy]
     before_action :authenticate_user!
 
     def index

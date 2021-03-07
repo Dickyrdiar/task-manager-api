@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
     namespace :auth do
       mount ActionCable.server => '/cable'
-      resources :users 
+      resources :users, params: :_username
       resources :sessions, only: %i[create destroy]
     end 
   end                                                                                                                                                                                       
