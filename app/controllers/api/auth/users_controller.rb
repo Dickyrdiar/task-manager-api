@@ -1,7 +1,13 @@
 class Api::Auth::UsersController < ApplicationController
+    before_action :authenticate_user!
+    
     def index
         @users = User.all
         render json: @users  
+    end 
+
+    def show
+        render json: @users, status: :ok 
     end 
 
     def create

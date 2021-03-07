@@ -22,7 +22,6 @@ group :production do
   gem 'devise', '~> 4.7', '>= 4.7.3'
   gem 'devise_invitable', '~> 2.0.0'
   gem 'twilio-ruby'
-  gem 'jwt'
 end 
 
 
