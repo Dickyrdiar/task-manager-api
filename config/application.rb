@@ -1,7 +1,6 @@
 require_relative 'boot'
 
 require "rails"
-require "devise"
 # Pick the frameworks you want:
 require "active_model/railtie"
 require "active_job/railtie"
@@ -28,7 +27,7 @@ module TaskManager
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
-    config.autoload_paths << Rails.root.join('lib')
+    config.autoload_paths << "#{Rails.root}/lib"
     config.middleware.use Rack::MethodOverride
     config.middleware.use ActionDispatch::Flash
     config.middleware.use ActionDispatch::Cookies
