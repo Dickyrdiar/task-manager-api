@@ -1,6 +1,6 @@
 class Api::Auth::UsersController < ApplicationController
-    before_action :authenticate_user!
-    
+    # before_action :authenticate_user!, execpt: [:create]
+
     def index
         @users = User.all
         render json: @users  
@@ -44,6 +44,14 @@ class Api::Auth::UsersController < ApplicationController
                 data: {}
             }
         end 
+    end 
+
+    def destroy
+        @user = User.find(params[:id])
+        @user.destroy 
+        render json: {
+            messages: 'user destroy success'
+        }
     end 
 
     private  

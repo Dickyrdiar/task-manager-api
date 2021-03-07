@@ -14,14 +14,12 @@ gem 'puma', '~> 3.11'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 group :production do
   gem 'uuidtools'
-  gem 'tiddle', '~> 1.5'
-  gem 'devise', '~> 4.7', '>= 4.7.3'
-  gem 'devise_invitable', '~> 2.0.0'
-  gem 'twilio-ruby'
+  gem 'paperclip'
+  gem 'jwt'
 end 
 
 
