@@ -19,7 +19,9 @@ gem 'bcrypt', '~> 3.1.7'
 group :production do
   gem 'uuidtools'
   gem 'paperclip'
-  gem 'jwt'
+  gem 'tiddle'
+  gem 'devise'
+  gem 'devise_invitable'
 end 
 
 
