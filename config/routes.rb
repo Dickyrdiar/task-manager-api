@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
     namespace :auth do
       mount ActionCable.server => '/cable'
-      post '/login', to: 'sessions#create'
+      resource :sessions
       resources :users
     end 
   end                                                                                                                                                                                       

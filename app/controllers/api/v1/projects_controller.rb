@@ -1,5 +1,5 @@
 class Api::V1::ProjectsController < ApplicationController
-    before_action :authenticate_user!
+    # before_action :authenticate_user!
 
     def index
         @projects = Project.all 
@@ -57,6 +57,6 @@ class Api::V1::ProjectsController < ApplicationController
     end 
 
     def project_params
-        params.permit(:name, :desc, :date_begining) 
+        params.require(:project).permit(:name, :desc, :date_begining) 
     end 
 end
