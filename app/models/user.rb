@@ -5,7 +5,6 @@ class User < ApplicationRecord
   end
 
   # database relation
-  has_many :authentication_tokens
   has_and_belongs_to_many :projects
 
   # Include default devise modules. Others available are:

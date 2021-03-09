@@ -1,5 +1,5 @@
 class Api::Auth::UsersController < ApplicationController
-    # before_action :authenticate_user!, execpt: [:create]
+    before_action :authorize_request, except: [:create, :index]
 
     def index
         @users = User.all

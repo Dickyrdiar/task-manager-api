@@ -1,5 +1,5 @@
 class Api::V1::ProjectsController < ApplicationController
-    # before_action :authenticate_user!
+    before_action :authorize_request, except: [:create, :index, :destroy]
 
     def index
         @projects = Project.all 
@@ -8,10 +8,15 @@ class Api::V1::ProjectsController < ApplicationController
 
     def show 
         render json: @project.as_json
+    end
+    
+    def new
+        # @project = current_user.projects.build  
     end 
     
     def create
         @project = Project.new(project_params)
+        # @project = current_user.projects.build(project_params)
         
         if @project.save 
             render json: {
@@ -47,7 +52,10 @@ class Api::V1::ProjectsController < ApplicationController
     end 
 
     def destroy
+        @project = Project.find(params[:id])
         @project.destroy 
+
+        render json: { messages: 'project destroy success' }
     end 
 
     private  
@@ -57,6 +65,6 @@ class Api::V1::ProjectsController < ApplicationController
     end 
 
     def project_params
-        params.require(:project).permit(:name, :desc, :date_begining) 
+        params.permit(:name, :desc, :date_begining, :user_id) 
     end 
 end
