@@ -15,14 +15,14 @@ class Api::Auth::UsersController < ApplicationController
 
         if @user.save 
             render json: {
-                messages: 'user create', 
-                is_messages: true, 
+                message: 'user create', 
+                is_message: true, 
                 data: { user: @user }
             }, status: :ok
-        else 
+        else
             render json: {
                 message: 'user failed', 
-                is_messages: false, 
+                is_message: false, 
                 data: {}
             }, status: :failed 
         end 
@@ -36,13 +36,13 @@ class Api::Auth::UsersController < ApplicationController
                 message: 'user update', 
                 is_message: true, 
                 data: { user: @user }
-            }
+            }, status: :ok
         else  
             render json: {
                 message: 'update failed', 
                 is_message: false, 
                 data: {}
-            }
+            }, status: :failed
         end 
     end 
 

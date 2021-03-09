@@ -22,6 +22,7 @@ group :production do
   gem 'tiddle'
   gem 'devise'
   gem 'devise_invitable'
+  gem 'jwt'
 end 
 
 
