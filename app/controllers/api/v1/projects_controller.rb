@@ -1,5 +1,5 @@
 class Api::V1::ProjectsController < ApplicationController
-    before_action :authorize_request, except: [:create, :index, :destroy]
+    before_action :authorize_request, except: [:create, :index, :destroy, :update]
 
     def index
         @projects = Project.all 
@@ -11,12 +11,12 @@ class Api::V1::ProjectsController < ApplicationController
     end
     
     def new
-        # @project = current_user.projects.build  
+        @project = current_user.projects.build
     end 
     
     def create
         @project = Project.new(project_params)
-        # @project = current_user.projects.build(project_params)
+        # @project = current_user.projects.new(params[:project_params]) 
         
         if @project.save 
             render json: {

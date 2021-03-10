@@ -42,7 +42,10 @@ class Api::V1::GroupsController < ApplicationController
     end 
 
     def destroy 
+        @group = Group.find(params[:id])
         @group.destroy 
+
+        render json: { messages: 'group success delete' }
     end 
 
     private 
