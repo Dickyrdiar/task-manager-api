@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   # database relation
   has_and_belongs_to_many :projects
+  has_many :groups
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

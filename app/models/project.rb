@@ -10,5 +10,5 @@ class Project < ApplicationRecord
 
     # database relation 
     has_many :messages, dependent: :destroy  
-    belongs_to :user, optional: true 
+    has_and_belongs_to_many :user, optional: true 
 end

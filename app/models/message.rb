@@ -6,7 +6,7 @@ class Message < ApplicationRecord
 
     # database relation 
    belongs_to :project
-   belongs_to :user
+   belongs_to :sender, class_name: :User, foreign_key: 'sender_id'
 
     # testing 
     validates_presence_of :text
