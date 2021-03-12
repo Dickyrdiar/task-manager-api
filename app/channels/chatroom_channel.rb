@@ -1,7 +1,7 @@
 class ChatRoom < ApplicationCable::Channel
     def subscribed
         if params[:room_id].present? 
-            steam_from("ChatRoom-#{(params[:room_id])}")
+            stream_from("ChatRoom-#{(params[:room_id])}")
         end  
     end  
 

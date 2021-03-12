@@ -10,4 +10,6 @@ class Message < ApplicationRecord
 
     # testing 
     validates_presence_of :text
+
+    afetr_create_commit { MessageBroadcastJob.perform_later(self) }
 end
