@@ -1,13 +1,18 @@
 class Api::V1::GroupsController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authorize_request, except: [:index, :create]
 
     def index
         @groups = Group.all 
         render json: @groups  
     end 
 
+    def new
+        @group = current_user.groups.build
+    end 
+
     def create
-        @group = Group.new(group_params)
+        # @group = Group.new(group_params)
+        @group = Group.new(group_params.merge(user: current_user))
         
         if @group.save 
             render json: {

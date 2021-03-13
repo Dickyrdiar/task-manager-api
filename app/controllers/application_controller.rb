@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+    # protect_from_forgery with: :exception
+
     def not_found
         render json: { error: 'not_found' }
     end 
