@@ -2,14 +2,15 @@ Rails.application.routes.draw do
   devise_for :users
   namespace :api do
     namespace :v1 do
-      resources :projects do 
-        resource :message, only: [:create, :destroy]
+      resources :groups do 
+        resources :projects do 
+          resource :message, only: [:create, :destroy]
+        end 
       end 
-      resources :groups
+      mount ActionCable.server => '/cable'
     end  
 
     namespace :auth do
-      mount ActionCable.server => '/cable'
       resource :sessions
       resources :users
     end 

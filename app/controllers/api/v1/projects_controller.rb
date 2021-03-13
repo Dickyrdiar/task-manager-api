@@ -1,5 +1,6 @@
 class Api::V1::ProjectsController < ApplicationController
-    before_action :authorize_request, except: [:create, :index, :destroy, :update]
+    # before_action :authenticate_user!, except: [:create, :index, :destroy, :update]
+    
 
     def index
         @projects = Project.all 
@@ -11,12 +12,12 @@ class Api::V1::ProjectsController < ApplicationController
     end
     
     def new
-        @project = current_user.projects.build
+        @project = current_grpup.projects.build
     end 
     
     def create
         # @project = Project.new(project_params)
-        @project = current_user.projects.new(params_project) 
+        @project = current_grpup.projects.new(params_project) 
         
         if @project.save 
             render json: {
@@ -65,6 +66,6 @@ class Api::V1::ProjectsController < ApplicationController
     end 
 
     def project_params
-        params.permit(:name, :desc, :date_begining, :user_id) 
+        params.permit(:name, :desc, :date_begining) 
     end 
 end

@@ -6,8 +6,9 @@ class Group < ApplicationRecord
     end 
 
     # validates 
-    validates_presence_of :name, :desc
+    # validates_presence_of :name, :desc
 
     # database relation 
-    belongs_to :users
+    has_many :projects
+    belongs_to :user, optional: true 
 end
