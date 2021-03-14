@@ -24,6 +24,13 @@ group :production do
   gem 'jwt'
 end 
 
+group :omniauth do
+ gem 'omniauth', '~> 2.0', '>= 2.0.3'
+ gem 'omniauth-github', '~> 2.0'
+ gem 'omniauth-google-oauth2', '~> 0.8.1'
+ gem 'omniauth-gitlab', '~> 3.0'
+end 
+
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

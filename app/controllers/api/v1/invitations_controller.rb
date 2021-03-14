@@ -1,6 +1,8 @@
 class Api::V1::InvitationsController < ApplicationController
     def create
-        # code here.. 
+       if @group.has_connected_with(current_user)
+        
+        self.resource = resource_class.invite!(params[resource_name])
     end 
 
     def edit 
