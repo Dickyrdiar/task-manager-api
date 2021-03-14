@@ -7,17 +7,15 @@ class Api::V1::ProjectsController < ApplicationController
         render json: @projects 
     end
 
-    def show 
-        render json: @project.as_json
-    end
-    
+   
     def new
-        @project = current_grpup.projects.build
+        @project = group.projects.build
     end 
     
     def create
         # @project = Project.new(project_params)
-        @project = current_grpup.projects.new(params_project) 
+        @user = User.find(params[:id])
+        @project = Project.new(project_params.merge(group: group))
         
         if @project.save 
             render json: {
@@ -57,6 +55,13 @@ class Api::V1::ProjectsController < ApplicationController
         @project.destroy 
 
         render json: { messages: 'project destroy success' }
+    end 
+
+    def invite
+        @project  = Project.find(params[:id])
+        invite_user = User.invite!*strong_invite_params, current_user)
+        invite_user.update(project: @project.id)
+        invited_user.projects << @project 
     end 
 
     private  
