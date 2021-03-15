@@ -1,9 +1,4 @@
 class Api::V1::InvitationsController < ApplicationController
-    def create
-       if @group.has_connected_with(current_user)
-        
-        self.resource = resource_class.invite!(params[resource_name])
-    end 
 
     def edit 
         sign_out_send("current_#{resource_name}") if send("#{resource_name}_signed_in?")
