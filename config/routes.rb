@@ -7,6 +7,9 @@ Rails.application.routes.draw do
           resource :message, only: [:create, :destroy]
         end 
       end 
+
+      post "/invitegroup" => "invite_group#create"
+      post "/inviteproject" => "invite_project#create"
       mount ActionCable.server => '/cable'
     end  
 
