@@ -10,6 +10,6 @@ class Project < ApplicationRecord
 
     # database relation 
     has_many :messages, dependent: :destroy  
-    has_many :users, through: :messages
+    has_many :invites
     belongs_to :group, optional: true 
 end

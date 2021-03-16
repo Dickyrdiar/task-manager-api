@@ -9,14 +9,14 @@ class Api::V1::ProjectsController < ApplicationController
 
    
     def new
-        @project = group.projects.build
+        @project = Project.new
     end 
     
     def create
-        # @project = Project.new(project_params)
-        @user = User.find(params[:id])
-        @project = Project.new(project_params.merge(group: group))
-        
+        @project = Project.new(project_params)
+        @project.owner = current_user 
+        @project.members = []
+
         if @project.save 
             render json: {
                 messages: 'project create',
