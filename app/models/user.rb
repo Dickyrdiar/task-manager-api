@@ -7,7 +7,7 @@ class User < ApplicationRecord
   # database relation
   has_many :groups
   has_many :messages
-
+  has_many :projects
   has_many :invitations, :class_name => "Invite", :foreign_key => 'recipient_id'
   has_many :sent_invites, :class_name => "Invite", :foreign_key => 'sender_id'
 
