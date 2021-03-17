@@ -6,7 +6,7 @@ class Api::Auth::SessionsController < ApplicationController
         @user = User.where(email: params[:email]).first 
         
         if @user&.valid_password?(params[:password])
-            # token = Tiddle.create_and_return_token(@user, request)
+            session[:user_id] = @user.id
             token = JWT.encode({ user_id: @user.id }, Rails.application.secrets.jwt_secret, 'HS256')
             render json: { user: @user, token: token }, status: :ok
         else  

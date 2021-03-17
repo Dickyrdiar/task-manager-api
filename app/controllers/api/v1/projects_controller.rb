@@ -1,6 +1,5 @@
 class Api::V1::ProjectsController < ApplicationController
-    # before_action :authenticate_user!, except: [:create, :index, :destroy, :update]
-    
+      
 
     def index
         @projects = Project.all 
@@ -13,9 +12,9 @@ class Api::V1::ProjectsController < ApplicationController
     end 
     
     def create
-        @project = Project.new(project_params)
-        @project.owner = current_user 
-        @project.members = []
+        @group = Group.find(params[:group_id])
+        @project = @group.projects.create(project_params)
+        # @project.user_id = current_user.id
 
         if @project.save 
             render json: {
@@ -57,13 +56,6 @@ class Api::V1::ProjectsController < ApplicationController
         render json: { messages: 'project destroy success' }
     end 
 
-    def invite
-        @project  = Project.find(params[:id])
-        invite_user = User.invite!*strong_invite_params, current_user)
-        invite_user.update(project: @project.id)
-        invited_user.projects << @project 
-    end 
-
     private  
 
     def set_project
@@ -71,6 +63,6 @@ class Api::V1::ProjectsController < ApplicationController
     end 
 
     def project_params
-        params.permit(:name, :desc, :date_begining) 
+        params.permit(:name, :desc, :date_begining, :user_id, :group_id) 
     end 
 end
