@@ -5,7 +5,7 @@ class User < ApplicationRecord
   end
 
   # database relation
-  has_many :groups, through: :messages
+  has_many :groups
   has_many :messages
 
   has_many :invitations, :class_name => "Invite", :foreign_key => 'recipient_id'

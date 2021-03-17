@@ -1,5 +1,5 @@
 class Api::V1::GroupsController < ApplicationController
-    before_action :authorize_request, except: [:index, :create]
+    before_action :authorize_request, except: [:index, :create, :update, :destroy]
 
     def index
         @groups = Group.all 
@@ -11,8 +11,8 @@ class Api::V1::GroupsController < ApplicationController
     end 
 
     def create
-        # @group = Group.new(group_params)
         @group = Group.new(group_params.merge(user: current_user))
+        # @group = current_user.groups.create(params[:group])
         
         if @group.save 
             render json: {
@@ -60,6 +60,6 @@ class Api::V1::GroupsController < ApplicationController
     end 
 
     def group_params
-        params.permit(:name, :desc)
+        params.require(:group).permit(:name, :desc, :user_id)
     end 
 end

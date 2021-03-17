@@ -5,10 +5,11 @@ class Message < ApplicationRecord
     end 
 
     # database relation 
-   belongs_to :project
-   belongs_to :user
+    belongs_to :project
+    belongs_to :user
+
     # testing 
     validates_presence_of :text
 
-    afetr_create_commit { MessageBroadcastJob.perform_later(self) }
+    after_create_commit { MessageBroadcastJob.perform_later(self) }
 end
