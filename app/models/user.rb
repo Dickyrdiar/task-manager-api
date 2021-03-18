@@ -8,11 +8,10 @@ class User < ApplicationRecord
   has_many :groups
   has_many :messages
   has_many :projects
-  has_many :invitations, :class_name => "Invite", :foreign_key => 'recipient_id'
-  has_many :sent_invites, :class_name => "Invite", :foreign_key => 'sender_id'
+  has_many :members
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 end
