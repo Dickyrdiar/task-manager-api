@@ -12,5 +12,8 @@ class Project < ApplicationRecord
     has_many :messages, dependent: :destroy  
     belongs_to :group, optional: true 
     belongs_to :user
-    has_many :members
+    has_many :invitations
+
+    # devise invitation
+    attr_reader :raw_invitation_token
 end

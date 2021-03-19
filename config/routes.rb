@@ -6,7 +6,8 @@ Rails.application.routes.draw do
 
       resources :groups do 
         resources :projects do
-          resource :members 
+          resource :invitations
+          # resource :members 
           resource :message, only: [:create, :destroy]
         end 
       end

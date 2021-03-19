@@ -8,10 +8,11 @@ class User < ApplicationRecord
   has_many :groups
   has_many :messages
   has_many :projects
-  has_many :members
+  has_many :invitations
+
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :invitable, :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 end
