@@ -8,7 +8,10 @@ class User < ApplicationRecord
   has_many :groups
   has_many :messages
   has_many :projects
-  has_many :invitations
+ 
+  # invitation relation 
+  has_many :invitations, :class_name => "Invitation", :foreign_key => 'recipient_id'
+  has_many :sent_invites, :class_name => "Invitation", :foreign_key => 'sender_id'
 
 
   # Include default devise modules. Others available are:
