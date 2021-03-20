@@ -1,12 +1,16 @@
 class Api::V1::InvitationsController < ApplicationController
 
+    def show  
+        @invitations = Invitation.all
+        render json: @invitations 
+    end 
+    
     def new 
     end 
 
     def create 
         @project = Project.find(params[:project_id])
-        @invite = Invitation.new(params[:invite])
-        @invite.project_id 
+        @invitation = @project.invitations.create(invitation_params.merge(user: current_user))
 
         if @invite.save 
             render json: {
@@ -21,9 +25,12 @@ class Api::V1::InvitationsController < ApplicationController
         end 
     end 
 
+    def destroy
+    end 
+
     private 
 
-    def invite_params
-        params.require(:invite).permit(:email, :project_id, :user_id) 
+    def invitation_params
+        params.permit(:email, :project_id, :user_id) 
     end 
 end

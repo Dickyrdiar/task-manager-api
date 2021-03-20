@@ -9,11 +9,4 @@ class Invitation < ApplicationRecord
     belongs_to :user
     after_save :email_invite_if_no_user
     
-    private  
-
-    def email_invite_if_no_user
-        unless User.find_by_email(email)
-            UserMailer.send_invites(self).delifer
-        end 
-    end 
 end
