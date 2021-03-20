@@ -12,6 +12,8 @@ class Project < ApplicationRecord
     has_many :messages, dependent: :destroy  
     belongs_to :group, optional: true 
     belongs_to :user
+    
+    # invitation relation 
     has_many :invitations
 
     # devise invitation
