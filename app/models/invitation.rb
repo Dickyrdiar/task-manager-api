@@ -6,9 +6,9 @@ class Invitation < ApplicationRecord
     end 
 
     # database relation 
-    belongs_to :project 
-    belongs_to :sender, :class_name => 'User'
-    belongs_to :recipient, :class_name => 'User'
+    belongs_to :project, optional: true 
+    belongs_to :sender, :class_name => 'User', optional: true 
+    belongs_to :recipient, :class_name => 'User', optional: true
 
     before_create :generate_token 
     before_save :check_user_existance 
