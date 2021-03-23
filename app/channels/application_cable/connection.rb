@@ -9,22 +9,17 @@ module ApplicationCable
     protected 
 
     def find_verified_user
-      auth_header = JSON.parse(cookies['auth_headers'])
+      unless request.headers.key?('Authorization') && request.headers['Authorization'].split('').size > 1
+        reject_unauthorized_connection 
+      end 
 
-      uid_name = JWT.headers_names[:'uid']
-      access_token_name = JWT.headers_names[:'access-token']
-      client_name = JWT.headers[:'client']
+      token = request.headers['Authorization'].split(' ')[1]
+      jwt = JWT.decode(token, Rails.application.credentials.jwt_key, true, algorithm: 'HS256', verify_jti: true)[0]
 
-      uid = auth_headers[uid_name]
-      token = auth_headers[access_token_name]
-      client_id = auth_headers[client_name]
-
-      @user = User.find_by_uid(uid)
-
-      if @user && @user.valid_token?(token, client_id)
+      if (@user = User.find(jwt['id']))
         @user 
-      else 
-        reject_unauthoriezed_connection
+      else  
+        reject_unauthorized_connection
       end
     end 
   end

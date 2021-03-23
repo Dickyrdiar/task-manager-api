@@ -14,7 +14,7 @@ class Invitation < ApplicationRecord
     before_save :check_user_existance 
 
     def generate_token
-        self.token = Digest::SHA1.hexdigest([self.project_id, Time.now, rand].join)
+       self.token = Digest::SHA1.hexdigest([self.project_id, Time.now, rand].join)
     end 
 
     def check_user_existance 
