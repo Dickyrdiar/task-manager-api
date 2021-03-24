@@ -16,12 +16,24 @@ class Api::V1::InvitationsController < ApplicationController
         if @invitation.save
             # if user already exist
             if @invitation.recipient != nil 
-                # send notification email 
+                # send notification email
+                @user = User.find(params[:user_id]) 
                 InviteMailer.existing_user_invite(@invitation).deliver 
                 # add user to project 
                 @invitation.recipient.project.push(@invitation.project)
+                render json: {
+                    messages: 'user invited', 
+                    is_messages: true, 
+                    data: { invitation: @invitation }
+                }, status: :ok
             else 
-                Invitation.new_user_invite(@invitation, new_user_registration_path(:invite_token => @invitation.token)).deliver
+                # Invitation.new_user_invite(@invitation, new_user_registration_path(:invite_token => @invitation.token)).deliver
+                @invitation = Invitation.new(@invitation, current_user(:invite_token => @invitation.token)).deliver
+                render json: {
+                    messages: 'invitation failed', 
+                    is_messages: false, 
+                    data: { }
+                }, status: :failed 
             end  
         else 
             render json: { messages: 'invitation failed' }, status: :failed
@@ -31,6 +43,6 @@ class Api::V1::InvitationsController < ApplicationController
     private 
 
     def invitation_params
-        params.require(:invitation).permit(:project_id, :email) 
+        params.require(:invitation).permit(:project_id, :user_id, :email) 
     end 
 end
