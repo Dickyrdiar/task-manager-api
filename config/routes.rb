@@ -8,7 +8,7 @@ Rails.application.routes.draw do
         resources :projects do
           resource :invitations
           # resource :members 
-          resource :message, only: [:create, :destroy]
+          resource :messages
         end 
       end
       

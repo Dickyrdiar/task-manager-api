@@ -27,17 +27,23 @@ class Api::V1::InvitationsController < ApplicationController
                     data: { invitation: @invitation }
                 }, status: :ok
             else 
-                # Invitation.new_user_invite(@invitation, new_user_registration_path(:invite_token => @invitation.token)).deliver
-                @invitation = Invitation.new(@invitation, current_user(:invite_token => @invitation.token)).deliver
-                render json: {
-                    messages: 'invitation failed', 
-                    is_messages: false, 
-                    data: { }
-                }, status: :failed 
+                sing_out_send("current_#{reosurce_name}") if send("#{resource_name}_singed_in?")
+                set_minimium_password_length 
+                resource.invitation_token = params[:invitation_token]
+                redirect_to "http://localhost:3001/api/v1/groups/group_id/projects/project_id/invitation#{params[:invitation_token]}"
             end  
         else 
             render json: { messages: 'invitation failed' }, status: :failed
         end  
+    end 
+
+
+    def destroy
+        @invitation.find(params[:id])
+        @invitation.destroy 
+        render json: {
+            messages: 'user has remove'
+        }  
     end 
 
     private 
