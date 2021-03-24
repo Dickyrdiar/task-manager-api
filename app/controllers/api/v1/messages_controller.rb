@@ -9,6 +9,7 @@ class Api::V1::MessagesController < ApplicationController
         @message = @project.messages.create(message_params.merge(sender: current_user))
 
         if @message.save 
+            ActionCable.server.broadcast "chatroom_channel", content: @message.text
             render json: @message, status: :ok 
         else  
             render json: { error: 'invalid message' }, status: :failed
@@ -25,6 +26,6 @@ class Api::V1::MessagesController < ApplicationController
     private  
 
     def set_message 
-        params.permit(:tetx, :sender_id)
+        params.permit(:text, :sender_id)
     end 
 end
