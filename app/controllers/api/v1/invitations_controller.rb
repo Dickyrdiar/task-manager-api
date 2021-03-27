@@ -27,10 +27,10 @@ class Api::V1::InvitationsController < ApplicationController
                     data: { invitation: @invitation }
                 }, status: :ok
             else 
-                sing_out_send("current_#{reosurce_name}") if send("#{resource_name}_singed_in?")
-                set_minimium_password_length 
-                resource.invitation_token = params[:invitation_token]
-                redirect_to "http://localhost:3001/api/v1/groups/group_id/projects/project_id/invitation#{params[:invitation_token]}"
+                # sing_out_send("current_#{reosurce_name}") if send("#{resource_name}_singed_in?")
+                # set_minimium_password_length 
+                # resource.invitation_token = params[:invitation_token]
+                # redirect_to "http://localhost:3001/api/v1/groups/group_id/projects/project_id/invitation#{params[:invitation_token]}"
             end  
         else 
             render json: { messages: 'invitation failed' }, status: :failed

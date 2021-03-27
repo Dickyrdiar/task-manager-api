@@ -6,7 +6,7 @@ class Api::V1::MessagesController < ApplicationController
     
     def create
         @project = Project.find(params[:project_id])
-        @message = @project.messages.create(message_params.merge(sender: current_user))
+        @message = @project.messages.create(message_params.merge(user: current_user))
 
         if @message.save 
             ActionCable.server.broadcast "chatroom_channel", content: @message.text
@@ -25,7 +25,7 @@ class Api::V1::MessagesController < ApplicationController
 
     private  
 
-    def set_message 
-        params.permit(:text, :sender_id)
+    def message_params 
+        params.permit(:text, :sender_id, :image)
     end 
 end

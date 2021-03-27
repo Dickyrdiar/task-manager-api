@@ -12,4 +12,8 @@ class Message < ApplicationRecord
     validates_presence_of :text
 
     after_create_commit { MessageBroadcastJob.perform_later(self) }
+
+    # image model connection 
+    # has_one_attached :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+    # attachment :avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 end
