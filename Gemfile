@@ -23,6 +23,7 @@ group :production do
   gem 'devise'
   gem 'devise_invitable'
   gem 'jwt'
+  gem "mini_magick"
 end 
 
 group :omniauth do
