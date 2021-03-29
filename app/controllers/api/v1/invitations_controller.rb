@@ -10,7 +10,7 @@ class Api::V1::InvitationsController < ApplicationController
 
     def create
         @project = Project.find(params[:project_id])
-        @invitation  = @project.invitations.create(invitation_params.merge(sender_id: current_user))
+        @invitation  = @project.invitations.create(invitation_params.merge(sender: current_user))
         # @invitation.sender_id  = current_user.id 
 
         if @invitation.save
@@ -27,10 +27,8 @@ class Api::V1::InvitationsController < ApplicationController
                     data: { invitation: @invitation }
                 }, status: :ok
             else 
-                # sing_out_send("current_#{reosurce_name}") if send("#{resource_name}_singed_in?")
-                # set_minimium_password_length 
-                # resource.invitation_token = params[:invitation_token]
-                # redirect_to "http://localhost:3001/api/v1/groups/group_id/projects/project_id/invitation#{params[:invitation_token]}"
+               InviteMailer.with(user: @user).welcome_email.deliver_now 
+               render json: @invitation
             end  
         else 
             render json: { messages: 'invitation failed' }, status: :failed
@@ -49,6 +47,6 @@ class Api::V1::InvitationsController < ApplicationController
     private 
 
     def invitation_params
-        params.require(:invitation).permit(:project_id, :user_id, :email) 
+        params.require(:invitation).permit(:project_id, :sender_id, :email) 
     end 
 end
