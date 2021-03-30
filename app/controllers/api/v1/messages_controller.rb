@@ -9,7 +9,7 @@ class Api::V1::MessagesController < ApplicationController
         @message = @project.messages.create(message_params.merge(user: current_user))
 
         if @message.save 
-            ActionCable.server.broadcast "chatroom_channel", content: @message.text
+            ActionCable.server.broadcast "project_channel", content: @message.text
             render json: @message, status: :ok 
         else  
             render json: { error: 'invalid message' }, status: :failed
