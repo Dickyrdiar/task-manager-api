@@ -42,6 +42,7 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    ansi (1.5.0)
     arel (9.0.0)
     bcrypt (3.1.16)
     bootsnap (1.7.2)
@@ -62,6 +63,22 @@ GEM
       actionmailer (>= 5.0)
       devise (>= 4.6)
     diff-lcs (1.4.4)
+    elasticsearch (7.12.0)
+      elasticsearch-api (= 7.12.0)
+      elasticsearch-transport (= 7.12.0)
+    elasticsearch-api (7.12.0)
+      multi_json
+    elasticsearch-extensions (0.0.33)
+      ansi
+      elasticsearch
+    elasticsearch-model (7.1.1)
+      activesupport (> 3)
+      elasticsearch (> 1)
+      hashie
+    elasticsearch-rails (7.1.1)
+    elasticsearch-transport (7.12.0)
+      faraday (~> 1)
+      multi_json
     erubi (1.10.0)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
@@ -240,6 +257,9 @@ DEPENDENCIES
   byebug
   devise
   devise_invitable
+  elasticsearch-extensions
+  elasticsearch-model (~> 7.1, >= 7.1.1)
+  elasticsearch-rails (~> 7.1, >= 7.1.1)
   factory_girl_rails (= 4.2.1)
   hiredis
   jwt

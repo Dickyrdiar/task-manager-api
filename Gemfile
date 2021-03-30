@@ -24,6 +24,10 @@ group :production do
   gem 'devise_invitable'
   gem 'jwt'
   gem "mini_magick"
+
+  # elasticsearch 
+  gem 'elasticsearch-model', '~> 7.1', '>= 7.1.1'
+  gem 'elasticsearch-rails', '~> 7.1', '>= 7.1.1'
 end 
 
 group :omniauth do
@@ -52,6 +56,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.2'
   gem 'factory_girl_rails', '4.2.1'
   gem 'pry', '~> 0.13.1'
+  gem 'elasticsearch-extensions'
 end
 
 group :development do

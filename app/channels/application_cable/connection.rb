@@ -1,16 +1,16 @@
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
-    identified_by :current_user
-    
+    identified_by :current_user 
+
     def connect
-      self.current_user = find_verified_user  
+      self.current_user = find_verified_user 
     end 
 
     protected 
 
     def find_verified_user
-      unless request.headers.key?('Authorization') && request.headers['Authorization'].split('').size > 1
-        reject_unauthorized_connection 
+      unless request.headers.key?('Authorization') && request.headers['Authorization'].split('').size > 1 
+        reject_unauthorized_connection
       end 
 
       token = request.headers['Authorization'].split(' ')[1]
