@@ -5,15 +5,12 @@ Rails.application.routes.draw do
 
 
       resources :groups do 
+        resource :groupinvitations 
         resources :projects do
           resource :invitations
-          # resource :members 
           resource :messages
         end 
-      end
-      
-      
-      resource :invites
+      end     
       mount ActionCable.server => '/cable'
     end  
 
