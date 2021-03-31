@@ -1,0 +1,2 @@
+class GroupMailer < ApplicationMailer
+end
