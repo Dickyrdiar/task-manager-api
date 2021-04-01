@@ -26,8 +26,9 @@ group :production do
   gem "mini_magick"
 
   # elasticsearch 
-  gem 'elasticsearch-model', '~> 7.1', '>= 7.1.1'
-  gem 'elasticsearch-rails', '~> 7.1', '>= 7.1.1'
+  gem 'searchkick', '~> 4.4', '>= 4.4.4'
+  gem 'elasticsearch-model'
+  gem 'elasticsearch-rails'
 end 
 
 group :omniauth do
@@ -56,7 +57,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.2'
   gem 'factory_girl_rails', '4.2.1'
   gem 'pry', '~> 0.13.1'
-  gem 'elasticsearch-extensions'
 end
 
 group :development do
