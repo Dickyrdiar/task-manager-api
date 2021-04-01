@@ -6,7 +6,7 @@ class Project < ApplicationRecord
     end
 
     # search 
-    # searchkick
+    require Searchable
 
     # validates 
     validates_presence_of :name, :desc, :date_begining

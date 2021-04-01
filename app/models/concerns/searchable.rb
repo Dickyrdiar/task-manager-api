@@ -61,10 +61,10 @@ module Searchable
                     analysis: {
                         autocomplete: {
                             type: :custom, 
-                            tokenizer: :standard 
+                            tokenizer: :standard, 
                             filter: %i[lowercase autocomplete]
                         }
-                    }, 
+                    },
 
                     filter: {
                         autocomplete: {
