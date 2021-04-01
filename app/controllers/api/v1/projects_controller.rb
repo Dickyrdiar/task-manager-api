@@ -59,6 +59,10 @@ class Api::V1::ProjectsController < ApplicationController
 
     private  
 
+    def search
+        results = Project.search(search_params[:q], search_params)
+    end 
+
     def set_project
         @project = Project.find(params[:id]) 
     end 

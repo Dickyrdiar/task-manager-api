@@ -14,7 +14,9 @@ class Api::V1::GroupInvitationsController < ApplicationController
                 @groupinvitation.recipient.group.push(@groupinvitation.group)
                 render json: @groupinvitation, status: :ok
             else 
-                # invitemailer 
+                GroupMailer.with(user: @user).welcome_email.deliver
+                render json: @groupinvitation 
+            end 
         else 
             rendr json: { message: 'invite failed ' }, status: :failed
         end 
