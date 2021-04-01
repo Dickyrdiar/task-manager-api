@@ -6,17 +6,7 @@ class Group < ApplicationRecord
     end 
 
     # validates 
-    # validates_presence_of :name, :desc
-
-    # elasticsearch 
-    include Elasticsearch::Model
-    include Elasticsearch::Model::Callbacks
-
-    settings index: { number_of_shard: 1 } do
-        mappings dynamic: 'false' do
-            indexes :name  
-        end  
-    end 
+    validates_presence_of :name, :desc
 
     # database relation 
     has_many :projects

@@ -42,7 +42,6 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    ansi (1.5.0)
     arel (9.0.0)
     bcrypt (3.1.16)
     bootsnap (1.7.2)
@@ -68,9 +67,6 @@ GEM
       elasticsearch-transport (= 7.12.0)
     elasticsearch-api (7.12.0)
       multi_json
-    elasticsearch-extensions (0.0.33)
-      ansi
-      elasticsearch
     elasticsearch-model (7.1.1)
       activesupport (> 3)
       elasticsearch (> 1)
@@ -223,6 +219,10 @@ GEM
     rspec-support (3.10.2)
     ruby2_keywords (0.0.4)
     ruby_dep (1.5.0)
+    searchkick (4.4.4)
+      activemodel (>= 5)
+      elasticsearch (>= 6)
+      hashie
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -257,9 +257,8 @@ DEPENDENCIES
   byebug
   devise
   devise_invitable
-  elasticsearch-extensions
-  elasticsearch-model (~> 7.1, >= 7.1.1)
-  elasticsearch-rails (~> 7.1, >= 7.1.1)
+  elasticsearch-model
+  elasticsearch-rails
   factory_girl_rails (= 4.2.1)
   hiredis
   jwt
@@ -277,6 +276,7 @@ DEPENDENCIES
   rails (~> 5.2.4, >= 5.2.4.5)
   redis (~> 4.0)
   rspec-rails (~> 4.0.2)
+  searchkick (~> 4.4, >= 4.4.4)
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data

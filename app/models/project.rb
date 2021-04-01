@@ -5,6 +5,9 @@ class Project < ApplicationRecord
         self.id = SecureRandom.uuid 
     end
 
+    # search 
+    # searchkick
+
     # validates 
     validates_presence_of :name, :desc, :date_begining
 
