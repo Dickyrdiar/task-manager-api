@@ -5,6 +5,9 @@ class Api::V1::ProjectsController < ApplicationController
         @group = Group.find(params[:group_id])
         @projects = Project.where(:group_id => @group.id)
         render json: @projects 
+
+        @projects = Project.ransack(params[:q]).result 
+        render json: @projects
     end
 
    

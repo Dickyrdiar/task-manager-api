@@ -1,6 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe Project, type: :model do
+RSpec.describe Project, elasticsearch: true, type: :model do
+  it 'should be indexed' do
+    expect(Project.__elasticsearch__.indexed_exists?).to be_truthy 
+  end 
+
   subject { Project.new(name: 'vinyard', desc: '18+company', date_begining: '14/05/2020') }
 
   before { subject.save }
