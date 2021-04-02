@@ -6,7 +6,7 @@ class Project < ApplicationRecord
     end
 
     # search 
-    require Searchable
+    include Elasticsearch::Model
 
     # validates 
     validates_presence_of :name, :desc, :date_begining

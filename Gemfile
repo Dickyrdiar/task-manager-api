@@ -26,7 +26,6 @@ group :production do
   gem "mini_magick"
 
   # elasticsearch 
-  gem 'searchkick', '~> 4.4', '>= 4.4.4'
   gem 'elasticsearch-model'
   gem 'elasticsearch-rails'
 end 
@@ -57,6 +56,9 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.2'
   gem 'factory_girl_rails', '4.2.1'
   gem 'pry', '~> 0.13.1'
+  gem 'database_cleaner'
+  # Programmatically start and stop ES for tests
+  gem 'elasticsearch-extensions'
 end
 
 group :development do
