@@ -25,9 +25,9 @@ group :production do
   gem 'jwt'
   gem "mini_magick"
 
-  # elasticsearch 
-  gem 'elasticsearch-model'
-  gem 'elasticsearch-rails'
+  # search 
+  gem 'sunspot_rails'
+  gem 'sunspot_solr'
 end 
 
 group :omniauth do

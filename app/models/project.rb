@@ -6,7 +6,13 @@ class Project < ApplicationRecord
     end
 
     # search 
-    include Elasticsearch::Model
+    searchable do
+        text :name, :desc 
+        text :message do 
+            message.map { |message| message.body }
+        end  
+    end 
+
 
     # validates 
     validates_presence_of :name, :desc, :date_begining
