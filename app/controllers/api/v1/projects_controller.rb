@@ -4,10 +4,11 @@ class Api::V1::ProjectsController < ApplicationController
     def index
         @group = Group.find(params[:group_id])
         @projects = Project.where(:group_id => @group.id)
+        @projects = Project.search(params[:search])
         render json: @projects 
 
-        @projects = Project.ransack(params[:q]).result 
-        render json: @projects
+        # @projects = Project.search(params[:search])
+        # render json: @projects
     end
 
    
@@ -71,6 +72,6 @@ class Api::V1::ProjectsController < ApplicationController
     end 
 
     def project_params
-        params.permit(:name, :desc, :date_begining, :user_id, :group_id) 
+        params.permit(:name, :desc, :date_begining, :user_id, :group_id, :search) 
     end 
 end
