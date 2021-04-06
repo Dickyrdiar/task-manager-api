@@ -21,20 +21,23 @@ group :production do
   gem 'uuidtools'
   gem 'paperclip'
   gem 'devise'
-  gem 'devise_invitable'
   gem 'jwt'
   gem "mini_magick"
 
+  # omniauth 
+  gem "omniauth", "~> 2.0.3"
+  gem 'omniauth-oauth2', '~> 1.7'
+  gem 'omniauth-github', '~> 2.0'
+  gem 'omniauth-google-oauth2', '~> 0.8.1'
+  gem 'omniauth-gitlab', '~> 3.0'
+
   # search 
-  gem 'sunspot_rails'
-  gem 'sunspot_solr'
+  gem 'elasticsearch-model'
+  gem 'elasticsearch-rails'
 end 
 
 group :omniauth do
- gem 'omniauth', '~> 2.0', '>= 2.0.3'
- gem 'omniauth-github', '~> 2.0'
- gem 'omniauth-google-oauth2', '~> 0.8.1'
- gem 'omniauth-gitlab', '~> 3.0'
+ 
 end 
 
 

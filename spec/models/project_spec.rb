@@ -1,5 +1,5 @@
 require 'rails_helper'
-require "action_cable/testing/rspec"
+# require "action_cable/testing/rspec"
 
 RSpec.describe Project, elasticsearch: true, type: :model do
   it 'should be indexed' do

@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
   namespace :api do
     namespace :v1 do
-
 
       resources :groups do 
         resource :groupinvitations 
@@ -17,6 +15,7 @@ Rails.application.routes.draw do
     namespace :auth do
       resource :sessions
       resource :users
+      match '/auth/:provider/callback', to: 'sessions#callback', :via => [:get, :post]
     end 
   end                                                                                                                                                                                       
 end
