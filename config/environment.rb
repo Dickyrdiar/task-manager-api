@@ -3,4 +3,4 @@ require_relative 'application'
 
 # Initialize the Rails application.
 Rails.application.initialize!
-config.gem 'sunspot_rails'
+# config.gem 'sunspot_rails'

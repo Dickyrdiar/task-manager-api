@@ -1,3 +1,5 @@
+require 'elasticsearch/model'
+
 class Project < ApplicationRecord
     # uuid 
     before_create :set_uuid 
@@ -6,13 +8,7 @@ class Project < ApplicationRecord
     end
 
     # search 
-    searchable do
-        text :name, :desc 
-        text :message do 
-            message.map { |message| message.body }
-        end  
-    end 
-
+    include Elasticsearch::Model
 
     # validates 
     validates_presence_of :name, :desc, :date_begining
