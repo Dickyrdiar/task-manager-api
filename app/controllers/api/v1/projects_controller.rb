@@ -1,11 +1,14 @@
 class Api::V1::ProjectsController < ApplicationController
-      
+    include JSONAPI::Utils
+        
+    end      
 
     def index
         @group = Group.find(params[:group_id])
         @projects = Project.where(:group_id => @group.id)
-        @projects = Project.search(params[:search])
-        render json: @projects 
+        @project = Project.ransack(params[:q]).results
+        
+        jsonapi_render json: @projects 
 
         # @projects = Project.search(params[:search])
         # render json: @projects

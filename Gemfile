@@ -23,6 +23,7 @@ group :production do
   gem 'devise'
   gem 'jwt'
   gem "mini_magick"
+   gem 'jsonapi-utils', '~> 0.7.3'
 
   # omniauth 
   gem "omniauth", "~> 2.0.3"
@@ -30,10 +31,12 @@ group :production do
   gem 'omniauth-github', '~> 2.0'
   gem 'omniauth-google-oauth2', '~> 0.8.1'
   gem 'omniauth-gitlab', '~> 3.0'
+  gem 'dotenv-rails'
+ 
 
   # search 
-  gem 'elasticsearch-model'
-  gem 'elasticsearch-rails'
+  gem 'ransack', github: 'activerecord-hackery/ransack'
+  gem 'chewy'
 end 
 
 group :omniauth do
@@ -61,7 +64,6 @@ group :development, :test do
   gem 'pry', '~> 0.13.1'
   gem 'database_cleaner'
   # Programmatically start and stop ES for tests
-  gem 'elasticsearch-extensions'
 end
 
 group :development do
