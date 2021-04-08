@@ -1,5 +1,3 @@
-require 'elasticsearch/model'
-
 class Project < ApplicationRecord
     # uuid 
     before_create :set_uuid 
@@ -8,7 +6,7 @@ class Project < ApplicationRecord
     end
 
     # search 
-    include Elasticsearch::Model
+    # include PgSearch::Model
 
     # validates 
     validates_presence_of :name, :desc, :date_begining
