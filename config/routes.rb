@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, defaults: { format: :json }, controllers: { omniauth_callbacks: 'api/auth/omniauth_callbacks' }
   namespace :api do
     namespace :v1 do
 
