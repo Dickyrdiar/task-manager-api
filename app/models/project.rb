@@ -1,13 +1,14 @@
+require 'searchkick'
+
 class Project < ApplicationRecord
+    searchkick
+    
     # uuid 
     before_create :set_uuid 
     def set_uuid 
         self.id = SecureRandom.uuid 
     end
-
-    # search 
-    # include PgSearch::Model
-
+   
     # validates 
     validates_presence_of :name, :desc, :date_begining
 
