@@ -9,15 +9,6 @@ GIT
       responders
       warden (~> 1.2.3)
 
-GIT
-  remote: https://github.com/omniauth/omniauth-github.git
-  revision: 1f772263c6cc00e84dabbc02beb755ba4c95f7d1
-  branch: master
-  specs:
-    omniauth-github (2.0.0)
-      omniauth (~> 2.0)
-      omniauth-oauth2 (~> 1.7.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -147,6 +138,9 @@ GEM
       hashie (>= 3.4.6)
       rack (>= 1.6.2, < 3)
       rack-protection
+    omniauth-github (2.0.0)
+      omniauth (~> 2.0)
+      omniauth-oauth2 (~> 1.7.1)
     omniauth-oauth2 (1.7.1)
       oauth2 (~> 1.4)
       omniauth (>= 1.9, < 3)
@@ -263,7 +257,8 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   mini_magick
   omniauth (~> 2.0, >= 2.0.4)
-  omniauth-github!
+  omniauth-github (~> 2.0)
+  omniauth-oauth2 (~> 1.7, >= 1.7.1)
   paperclip
   pg (>= 0.18, < 2.0)
   pry (~> 0.13.1)

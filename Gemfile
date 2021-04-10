@@ -26,9 +26,11 @@ group :production do
   gem 'jsonapi-utils', '~> 0.7.3'
   gem "figaro"
 
-  # omniauth 
+  # omniauth
+  gem 'omniauth-oauth2', '~> 1.7', '>= 1.7.1' 
   gem 'omniauth', '~> 2.0', '>= 2.0.4'
-  gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
+  gem 'omniauth-github', '~> 2.0'
+
  
 
   # search   
