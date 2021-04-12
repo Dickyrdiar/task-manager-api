@@ -25,11 +25,14 @@ group :production do
   gem "mini_magick"
   gem 'jsonapi-utils', '~> 0.7.3'
   gem "figaro"
+  gem "jbuilder"
+  gem 'sidekiq'
 
   # omniauth
   gem 'omniauth-oauth2', '~> 1.7', '>= 1.7.1' 
   gem 'omniauth', '~> 2.0', '>= 2.0.4'
   gem 'omniauth-github', '~> 2.0'
+  gem 'omniauth-google-oauth2'
 
  
 
