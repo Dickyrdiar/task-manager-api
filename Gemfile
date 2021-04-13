@@ -27,6 +27,8 @@ group :production do
   gem "figaro"
   gem "jbuilder"
   gem 'sidekiq'
+  gem 'fcm'
+  gem 'rpush'
 
   # omniauth
   gem 'omniauth-oauth2', '~> 1.7', '>= 1.7.1' 
