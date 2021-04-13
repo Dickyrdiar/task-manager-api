@@ -16,7 +16,6 @@ Rails.application.routes.draw do
     namespace :auth do
       resource :sessions
       resource :users
-      match '/auth/:provider/callback', to: 'sessions#callback', :via => [:get, :post]
     end 
   end                                                                                                                                                                                       
 end
