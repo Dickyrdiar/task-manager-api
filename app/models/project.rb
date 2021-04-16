@@ -1,7 +1,6 @@
-require 'searchkick'
+
 
 class Project < ApplicationRecord
-    searchkick
     
     # uuid 
     before_create :set_uuid 

@@ -120,6 +120,7 @@ GEM
       rake
     mini_magick (4.11.0)
     mini_mime (1.1.0)
+    mini_portile2 (2.5.0)
     minitest (5.14.4)
     msgpack (1.4.2)
     multi_json (1.15.0)
@@ -130,6 +131,9 @@ GEM
     net-http2 (0.18.4)
       http-2 (~> 0.11)
     nio4r (2.5.7)
+    nokogiri (1.11.3)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
     nokogiri (1.11.3-x86_64-linux)
       racc (~> 1.4)
     oauth2 (1.4.7)
@@ -165,6 +169,8 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     puma (3.12.6)
+    pundit (2.1.0)
+      activesupport (>= 3.0.0)
     racc (1.5.2)
     rack (2.2.3)
     rack-cors (1.1.1)
@@ -292,6 +298,7 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   pry (~> 0.13.1)
   puma (~> 3.11)
+  pundit
   rack-cors
   rails (~> 5.2.4, >= 5.2.4.5)
   redis (~> 4.0)

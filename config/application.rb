@@ -1,5 +1,6 @@
 require_relative 'boot'
 
+# require 'rpush'
 require "rails"
 require "devise"
 # Pick the frameworks you want:
@@ -15,7 +16,7 @@ require "action_cable/engine"
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
-# you've limited to :test, :development, or :production.
+# you've limited to :tes, :development, or :production.
 Bundler.require(*Rails.groups)
 
 module TaskManager

@@ -29,6 +29,7 @@ group :production do
   gem 'sidekiq'
   gem 'fcm'
   gem 'rpush'
+  gem 'pundit'
 
   # omniauth
   gem 'omniauth-oauth2', '~> 1.7', '>= 1.7.1' 

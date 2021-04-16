@@ -1,5 +1,10 @@
 class ApplicationController < ActionController::API
-    protect_from_forgery with: :exception
+    # protect_from_forgery with: :exception
+
+    # include do 
+    #     include Pundit
+    #     rescue_from Pundit::NotAuthorizedError
+    # end 
 
     def not_found
         render json: { error: 'not_found' }
