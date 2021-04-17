@@ -9,6 +9,9 @@ class User < ApplicationRecord
   has_many :messages
   has_many :projects
  
+  # notification 
+  has_many :notifications, as: :recipient
+
   # invitation relation 
   has_many :invitations, :class_name => "Invitation", :foreign_key => 'recipient_id'
   has_many :sent_invites, :class_name => "Invitation", :foreign_key => 'sender_id'
