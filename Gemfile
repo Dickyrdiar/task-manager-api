@@ -30,6 +30,7 @@ group :production do
   gem 'fcm'
   gem 'rpush'
   gem 'pundit'
+  gem 'meilisearch'
 
   # omniauth
   gem 'omniauth-oauth2', '~> 1.7', '>= 1.7.1' 
