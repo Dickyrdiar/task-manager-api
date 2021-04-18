@@ -19,7 +19,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 group :production do
   gem 'uuidtools'
-  gem 'paperclip'
+  gem 'carrierwave'
   gem 'devise', github: 'heartcombo/devise'
   gem 'jwt'
   gem "mini_magick"

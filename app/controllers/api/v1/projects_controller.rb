@@ -71,6 +71,6 @@ class Api::V1::ProjectsController < ApplicationController
     end 
 
     def project_params
-        params.permit(:name, :desc, :date_begining, :user_id, :group_id, :search) 
+        params.permit(:name, :desc, :date_begining, :user_id, :group_id, :project_image) 
     end 
 end
