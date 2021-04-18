@@ -1,5 +1,3 @@
-
-
 class Project < ApplicationRecord
     
     # uuid 
@@ -15,11 +13,13 @@ class Project < ApplicationRecord
     has_many :messages, dependent: :destroy  
     belongs_to :group, optional: true 
     belongs_to :user
-    belongs_to :owner, :class_name => "User"
+    # belongs_to :owner, :class_name => "User"
     
     # invitation relation 
     has_many :invitations
 
     # devise invitation
     attr_reader :raw_invitation_token
+
+    mount_uploaders :image, ImageUploader
 end

@@ -3,6 +3,7 @@ require_relative 'boot'
 require 'rpush'
 require "rails"
 require "devise"
+require 'carrierwave'
 # Pick the frameworks you want:
 require "active_model/railtie"
 require "active_job/railtie"
