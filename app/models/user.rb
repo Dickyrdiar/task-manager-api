@@ -5,9 +5,11 @@ class User < ApplicationRecord
   end
 
   # database relation
-  has_many :groups
+  has_many :groups, :through => :memberships
   has_many :messages
-  has_many :projects
+  has_many :projects :through => :project_members
+  has_many :memberships
+  has_many :project_members
  
   # notification 
   has_many :notifications, as: :recipient

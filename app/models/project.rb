@@ -12,8 +12,9 @@ class Project < ApplicationRecord
     # database relation 
     has_many :messages, dependent: :destroy  
     belongs_to :group, optional: true 
-    belongs_to :user
-    # belongs_to :owner, :class_name => "User"
+    belongs_to :user, :through => :project_members
+    belongs_to :owner, :class_name => "User"
+    has_many :project_members
     
     # invitation relation 
     has_many :invitations
@@ -21,5 +22,5 @@ class Project < ApplicationRecord
     # devise invitation
     attr_reader :raw_invitation_token
 
-    mount_uploaders :image, ImageUploader
+    # mount_uploaders :image, ImageUploader
 end
