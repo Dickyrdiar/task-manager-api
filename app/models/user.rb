@@ -7,7 +7,7 @@ class User < ApplicationRecord
   # database relation
   has_many :groups, :through => :memberships
   has_many :messages
-  has_many :projects :through => :project_members
+  has_many :projects, through: :project_members
   has_many :memberships
   has_many :project_members
  
