@@ -29,19 +29,14 @@ group :production do
   gem 'sidekiq'
   gem 'fcm'
   gem 'rpush'
-  gem 'pundit'
-  gem 'meilisearch'
+  gem 'cancancan', '~> 1.15'
+  gem "algoliasearch-rails"
 
   # omniauth
   gem 'omniauth-oauth2', '~> 1.7', '>= 1.7.1' 
   gem 'omniauth', '~> 2.0', '>= 2.0.4'
   gem 'omniauth-github', '~> 2.0'
   gem 'omniauth-google-oauth2'
-
- 
-
-  # search   
-  # gem 'searchkick'
 end 
 
 
