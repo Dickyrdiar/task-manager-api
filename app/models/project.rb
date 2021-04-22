@@ -12,7 +12,7 @@ class Project < ApplicationRecord
     # database relation 
     has_many :messages, dependent: :destroy  
     belongs_to :group, optional: true 
-    has_many :user, through: :memberships
+    has_many :user, through: :project_members
     belongs_to :owner, :class_name => "User"
     has_many :project_members
     
