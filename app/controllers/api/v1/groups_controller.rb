@@ -16,7 +16,8 @@ class Api::V1::GroupsController < ApplicationController
 
     def create
         @group = Group.new(group_params.merge(user: current_user))
-       
+        # @group.user << current_user
+
         if @group.save 
             render json: {
                 messages: 'group create', 

@@ -5,11 +5,15 @@ class User < ApplicationRecord
   end
 
   # database relation
-  has_many :groups, :through => :memberships
+  # belongs_to :groups, :through => :memberships
   has_many :messages
   has_many :projects, through: :project_members
   has_many :memberships
   has_many :project_members
+  has_many :groups, :through => :memberships
+
+  # owner 
+  has_one :owner_group, foreign_key: 'owner_id', class_name: 'Group'
  
   # notification 
   has_many :notifications, as: :recipient
