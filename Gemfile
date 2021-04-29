@@ -33,6 +33,7 @@ group :development do
   gem 'rpush'
   gem 'cancancan', '~> 1.15'
   gem "algoliasearch-rails"
+  gem 'friendly_id'
 
   # omniauth
   gem 'omniauth-oauth2', '~> 1.7', '>= 1.7.1' 

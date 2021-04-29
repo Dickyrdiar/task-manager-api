@@ -8,9 +8,9 @@ class User < ApplicationRecord
   # belongs_to :groups, :through => :memberships
   has_many :messages
   has_many :projects, through: :project_members
-  has_many :memberships
   has_many :project_members
-  has_many :groups, :through => :memberships
+  has_many :group_members, :through => :group_members
+  attr_accessor :name, :desc, :owner_id
 
   # owner 
   has_one :owner_group, foreign_key: 'owner_id', class_name: 'Group'
