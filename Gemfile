@@ -6,7 +6,9 @@ ruby '2.7.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.4', '>= 5.2.4.5'
 # Use postgresql as the database for Active Record
-gem 'pg', '>= 0.18', '< 2.0'
+group :production do 
+  gem 'pg', '>= 0.18', '< 2.0'
+end 
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -17,7 +19,7 @@ gem 'hiredis'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-group :production do
+group :development do
   gem 'uuidtools'
   gem 'carrierwave'
   gem 'devise', github: 'heartcombo/devise'
@@ -31,6 +33,7 @@ group :production do
   gem 'rpush'
   gem 'cancancan', '~> 1.15'
   gem "algoliasearch-rails"
+  gem 'friendly_id'
 
   # omniauth
   gem 'omniauth-oauth2', '~> 1.7', '>= 1.7.1' 
@@ -69,6 +72,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+gem 'mimemagic', '~> 0.4.3'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

@@ -21,6 +21,7 @@ class Api::V1::ProjectsController < ApplicationController
         # @project.user_id = current_user.id
 
         if @project.save 
+            @project.user << current_user
             render json: {
                 messages: 'project create',
                 is_messages: true, 

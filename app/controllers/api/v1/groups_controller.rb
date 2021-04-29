@@ -2,10 +2,10 @@ class Api::V1::GroupsController < ApplicationController
     before_action :authorize_request, except: [:index, :show, :create, :update, :destroy]
 
     def index
-        @groups = Group.all 
-        render json: @groups 
-        # @groups = Group.where(:user_id => current_user.id) 
-        # render json: @groups
+        # @groups = Group.all 
+        # render json: @groups 
+        @groups = Group.where(:user_id => current_user.id) 
+        render json: @groups
     end 
 
     def show
@@ -16,7 +16,8 @@ class Api::V1::GroupsController < ApplicationController
 
     def create
         @group = Group.new(group_params.merge(user: current_user))
-       
+        # @group.user << current_user
+
         if @group.save 
             render json: {
                 messages: 'group create', 
