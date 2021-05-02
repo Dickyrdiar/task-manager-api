@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :group_member do
     user nil
-    group ""
+    group nil
   end
 end

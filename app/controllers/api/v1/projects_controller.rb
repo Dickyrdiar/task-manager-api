@@ -10,6 +10,8 @@ class Api::V1::ProjectsController < ApplicationController
         # render json: @projects
     end
 
+    def show 
+    end
    
     def new
         @project = Project.new
@@ -21,7 +23,6 @@ class Api::V1::ProjectsController < ApplicationController
         # @project.user_id = current_user.id
 
         if @project.save 
-            @project.user << current_user
             render json: {
                 messages: 'project create',
                 is_messages: true, 
