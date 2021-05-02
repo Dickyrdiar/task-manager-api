@@ -34,6 +34,8 @@ group :development do
   gem 'cancancan', '~> 1.15'
   gem "algoliasearch-rails"
   gem 'friendly_id'
+  # gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: '776037c0fc799bb09da8c9ea47980bd3bf296874'
+  # gem 'axlsx_rails'
 
   # omniauth
   gem 'omniauth-oauth2', '~> 1.7', '>= 1.7.1' 

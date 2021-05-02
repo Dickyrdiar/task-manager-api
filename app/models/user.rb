@@ -4,24 +4,18 @@ class User < ApplicationRecord
     self.id = SecureRandom.uuid 
   end
 
-  # database relation
-  # belongs_to :groups, :through => :memberships
   has_many :messages
-  has_many :projects, through: :project_members
-  has_many :project_members
-  has_many :group_members, :through => :group_members
   attr_accessor :name, :desc, :owner_id
 
-  # owner 
-  has_one :owner_group, foreign_key: 'owner_id', class_name: 'Group'
- 
-  # notification 
+  has_one :owned_group, foreign_key: "owner_id", class_name: "Group"
+  has_many :groups, through: :group_members
+  has_many :group_members
+  has_one :owned_project, foreign_key: "owned_id", class_name: "Project"
+  has_many :projects, through: :project_members
+  has_many :project_members
   has_many :notifications, as: :recipient
-
-  # invitation relation 
   has_many :invitations, :class_name => "Invitation", :foreign_key => 'recipient_id'
   has_many :sent_invites, :class_name => "Invitation", :foreign_key => 'sender_id'
-
   has_many :groupinvitations, :class_name => "Groupinvitation", :foreign_key => 'recipient_id'
   has_many :sent_groupinvitations, :class_name => "Groupinvitation", :foreign_key => 'sender_id'
 
