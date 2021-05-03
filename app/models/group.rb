@@ -5,6 +5,8 @@ class Group < ApplicationRecord
         self.id  = SecureRandom.uuid  
     end 
 
+    # include AlgoliaSearchable
+
     # validates 
     validates_presence_of :name, :desc
 
