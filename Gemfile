@@ -31,7 +31,7 @@ group :development do
   gem 'sidekiq'
   gem 'fcm'
   gem 'rpush'
-  gem 'cancancan', '~> 1.15'
+  gem 'pundit'
   gem "algoliasearch-rails"
   gem 'friendly_id'
   # gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: '776037c0fc799bb09da8c9ea47980bd3bf296874'

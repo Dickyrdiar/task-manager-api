@@ -15,6 +15,18 @@ class ::Api::Auth::OmniauthCallbacksController < Devise::OmniauthCallbacksContro
     end 
   end 
 
+  def google_oauth2 
+    @user = User.from_omanituh(request.env['omniauth.auth']) 
+
+    if @user.persisted? 
+      flash[:notice] = I18n.t 'devise omniauth callbacks success', kind: 'Google'
+      sign_in_and_redirect @user, event: :authentication
+    else  
+      session['devise.google_data'] = request.env['omniauth.auth'].except('extra')
+      render json: @user 
+    end 
+  end 
+
   def failure 
   end 
 end
