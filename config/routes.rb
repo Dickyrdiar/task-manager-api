@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       resources :groups do 
         resource :groupinvitations 
         resources :projects do
-          resource :invitations
+          resource :project_invitations
           resource :messages
         end 
       end     

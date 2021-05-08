@@ -9,9 +9,8 @@ class Api::V1::GroupsController < ApplicationController
     end 
 
     def show
-       @group = Group.find(params[:id])
-
-       render json: @group
+      @group = Group.find(params[:id])
+      @group_members = GroupMember.where(group_id: @group)
     end 
 
     def create
