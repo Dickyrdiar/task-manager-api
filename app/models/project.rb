@@ -12,9 +12,9 @@ class Project < ApplicationRecord
     # database relation 
     has_many :messages, dependent: :destroy  
     belongs_to :group, optional: true 
-    belongs_to :user, class_name: "User", optional: true
-    has_many :members, through: :project_members 
-    has_many :project_members
+    
+    has_many :project_members, dependent: :destroy
+    has_many :users, through: :project_members
     
     # invitation relation 
     has_many :invitations

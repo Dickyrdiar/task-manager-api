@@ -7,12 +7,12 @@ class User < ApplicationRecord
   has_many :messages
   attr_accessor :name, :desc, :owner_id
 
-  has_one :owned_group, foreign_key: "owner_id", class_name: "Group"
+  has_many :group_members, dependent: :destroy
   has_many :groups, through: :group_members
-  has_many :group_members
-  has_one :owned_project, foreign_key: "owned_id", class_name: "Project"
+
+  has_many :project_members, dependent: :destroy
   has_many :projects, through: :project_members
-  has_many :project_members
+
   has_many :notifications, as: :recipient
   has_many :invitations, :class_name => "Invitation", :foreign_key => 'recipient_id'
   has_many :sent_invites, :class_name => "Invitation", :foreign_key => 'sender_id'

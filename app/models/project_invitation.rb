@@ -1,0 +1,23 @@
+class ProjectInvitation < ApplicationRecord
+    belongs_to :project 
+    belongs_to :sender, :class_name => "User"
+    belongs_to :recipient, :class_name => "User"
+
+    before_create :generate_token 
+    before_save :check_user_existanse
+
+    private  
+
+    def generate_token
+        self.token = Digest::SHA1.hexdigest([self.project_id, Time.now, rand],join)  
+    end 
+
+    def check_user_existanse 
+        existing_user = User.find_by_email([recipient_id])
+        if existing_user 
+            errors.add :recipient_email, 'is already a member'
+        else  
+            recipient_id 
+        end 
+    end 
+end

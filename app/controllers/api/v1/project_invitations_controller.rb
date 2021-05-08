@@ -1,4 +1,4 @@
-class Api::V1::InvitationsController < ApplicationController
+class Api::V1::ProjectInvitationsController < ApplicationController
     def show
         # @invitations = Invitation.all 
         # render json: @invitations 
