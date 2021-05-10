@@ -1,52 +1,32 @@
 class Api::V1::ProjectInvitationsController < ApplicationController
     def show
-        # @invitations = Invitation.all 
-        # render json: @invitations 
-
         @project = Project.find(params[:project_id])
-        @invitations = Invitation.where(:project_id => @project.id)
-        render json: @invitations
+        @project_invitations = ProjectInvitation.where(:project_id => @project.id)
+        render json: @project_invitations 
     end 
 
-    def create
+    def create 
         @project = Project.find(params[:project_id])
-        @invitation  = @project.invitations.create(invitation_params.merge(sender: current_user))
-        # @invitation.sender_id  = current_user.id 
+        @project_invitation = @project.project_invitations.create(project_invitation_params.merge(sender: current_user))
 
-        if @invitation.save
-            # if user already exist
-            if @invitation.recipient != nil 
-                # send notification email
-                @user = User.find(params[:user_id]) 
-                InviteMailer.existing_user_invite(@invitation).deliver 
-                # add user to project 
-                @invitation.recipient.project.push(@invitation.project)
-                render json: {
-                    messages: 'user invited', 
-                    is_messages: true, 
-                    data: { invitation: @invitation }
-                }, status: :ok
+        if @project_invitations.save 
+            if @project_invitation.recipient != nil
+                @user = User.find(params[:user_id])
+                ProjectMailer.existing_user_invite(@project_invitation).deliver
+                @project_invitation.recipient.project.push(@project.project_members)
+                render json: @project, status: :ok 
             else 
-               InviteMailer.with(user: @user).welcome_email.deliver_now 
-               render json: @invitation
-            end  
+                ProjectMailer.with(user: @user).welcome.email.deliver_now 
+                render json: @project
+            end 
         else 
-            render json: { messages: 'invitation failed' }, status: :failed
-        end  
-    end 
+            render json: { messages: 'invitation failed' }, status: :unproccessable_entity
+        end 
+    end
+    
+    private  
 
-
-    def destroy
-        @invitation.find(params[:id])
-        @invitation.destroy 
-        render json: {
-            messages: 'user has remove'
-        }  
-    end 
-
-    private 
-
-    def invitation_params
-        params.require(:invitation).permit(:project_id, :sender_id, :email) 
+    def project_invitation_params 
+        params.require(:project_invitation).permit(:project_id, :sender_id, :email)
     end 
 end

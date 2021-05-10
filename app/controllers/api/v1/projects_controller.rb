@@ -5,9 +5,6 @@ class Api::V1::ProjectsController < ApplicationController
         @projects = Project.where(:group_id => @group.id)
         
         render json: @projects 
-
-        # @projects = Project.search(params[:search])
-        # render json: @projects
     end
 
     def show 
