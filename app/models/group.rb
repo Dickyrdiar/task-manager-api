@@ -12,10 +12,9 @@ class Group < ApplicationRecord
 
     # database relation 
     has_many :projects
-    # has_many :user, optional: true, :dependent => :destroy 
-    
     has_many :group_members, dependent: :destroy
     has_many :users, through: :group_members
+    belongs_to :user
 
     has_many :invitations, :class_name => "Invitation", :foreign_key => 'recipient_id'
     has_many :sent_invites, :class_name => "Invitation", :foreign_key => 'sender_id'

@@ -1,10 +1,9 @@
 class CreateGroupInvitations < ActiveRecord::Migration[5.2]
   def change
-    create_table :group_invitations, id: false  do |t|
+    create_table :group_invitations, id: false do |t|
+      t.binary :id, limit: 36, primary_key: true 
       t.string :email 
-      t.string :username
-      t.integer :sender_id  
-      t.integer :recipient_id 
+      t.integer :sender_id 
       t.string :token
 
       t.timestamps

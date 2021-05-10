@@ -15,6 +15,7 @@ class Project < ApplicationRecord
     
     has_many :project_members, dependent: :destroy
     has_many :users, through: :project_members
+    belongs_to :user
     
     # invitation relation 
     has_many :invitations

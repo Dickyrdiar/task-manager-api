@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
 
       resources :groups do 
-        resource :groupinvitations 
+        resource :group_invitations
         resources :projects do
           resource :project_invitations
           resource :messages
