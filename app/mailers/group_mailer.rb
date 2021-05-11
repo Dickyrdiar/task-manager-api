@@ -1,8 +1,7 @@
 class GroupMailer < ApplicationMailer
-    default from: 'Teamwork@mail.com'
+    default from: 'dickyardiar1@gmail.com'
 
-    def welcome_email 
+    def welcome_email
         @user = params[:user]
-        mail(to: @user.email, subject: 'Welcome to Teamwork')
     end 
 end
