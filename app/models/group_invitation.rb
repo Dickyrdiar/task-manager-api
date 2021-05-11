@@ -4,12 +4,12 @@ class GroupInvitation < ApplicationRecord
         self.id = SecureRandom.uuid 
     end 
 
-    belongs_to :group 
+    belongs_to :group
     belongs_to :sender, :class_name => "User"
     belongs_to :recipient, :class_name => "User"
 
     before_create :generate_token 
-    before_save :check_user_existanse
+    before_save :check_user_existance
 
     private  
 
@@ -17,7 +17,7 @@ class GroupInvitation < ApplicationRecord
         self.token = Digest::SHA1.hexdigest([self.group_id, Time.nwo, rand])
     end 
 
-    def check_user_existanse
+    def check_user_existance
         existing_user = User.find_by_email([recipient_id])
         if existing_user 
             errors.add :recipient_email, 'is already a member'

@@ -7,16 +7,16 @@ class Api::V1::ProjectInvitationsController < ApplicationController
 
     def create 
         @project = Project.find(params[:project_id])
-        @project_invitation = @project.project_invitations.create(project_invitation_params.merge(sender: current_user))
+        @project_invitation = ProjectInvitation.new(project_invitation_params.merge(sender: current_user))
 
-        if @project_invitations.save 
+        if @project_invitation.save 
             if @project_invitation.recipient != nil
                 @user = User.find(params[:user_id])
                 ProjectMailer.existing_user_invite(@project_invitation).deliver
                 @project_invitation.recipient.project.push(@project.project_members)
                 render json: @project, status: :ok 
             else 
-                ProjectMailer.with(user: @user).welcome.email.deliver_now 
+                ProjectMailer.with(user: @user).welcome_email.deliver_now 
                 render json: @project
             end 
         else 
