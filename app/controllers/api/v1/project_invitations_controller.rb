@@ -5,28 +5,17 @@ class Api::V1::ProjectInvitationsController < ApplicationController
         render json: @project_invitations 
     end 
 
-    def create 
-        @project = Project.find(params[:project_id])
-        @project_invitation = ProjectInvitation.new(project_invitation_params.merge(sender: current_user))
+    def create  
+        @project = Project.find_by(params[:project_id])
+        invite = ProjectMember.new(user_id: params[:user_id], project_id: params[:project_id].merge(sender: current_user))
 
-        if @project_invitation.save 
-            if @project_invitation.recipient != nil
+        if invite.save 
+            if invite != nil
                 @user = User.find(params[:user_id])
-                ProjectMailer.existing_user_invite(@project_invitation).deliver
-                @project_invitation.recipient.project.push(@project.project_members)
-                render json: @project, status: :ok 
+                ProjectMailer.exsiting_user_invite 
             else 
-                ProjectMailer.with(user: @user).welcome_email.deliver_now 
-                render json: @project
             end 
         else 
-            render json: { messages: 'invitation failed' }, status: :unproccessable_entity
         end 
-    end
-    
-    private  
-
-    def project_invitation_params 
-        params.require(:project_invitation).permit(:project_id, :sender_id, :email)
     end 
 end

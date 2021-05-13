@@ -1,4 +1,22 @@
 class GroupMember < ApplicationRecord
-  belongs_to :user
-  belongs_to :group
+  belongs_to :user, optional: true
+  belongs_to :group 
+
+  before_create :generate_token 
+  before_save :check_user_existance
+  
+  private  
+
+  def generate_token
+    self.token = Digest::SHA1.hexdigest([self.group_id, Time.now, rand].join) 
+  end 
+
+  def check_user_existance
+    existing_user = User.find_by(recipient_id)
+    if existing_user
+      errors.add :recipient_id, 'is already a member'
+    else  
+      recipient_id 
+    end 
+  end 
 end
