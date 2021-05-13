@@ -7,25 +7,15 @@ class Api::V1::GroupInvitationsController < ApplicationController
 
     def create 
         @group = Group.find(params[:group_id])
-        @group_invitation = GroupInvitation.new(group_invitation_params.merge(sender: current_user))
+        invite = GroupMember.new(group_invitation_params.merge(user_id: current_user))
 
-        if @group_invitation.save 
-            if @group_invitation.recipient != nil  
+        if invite.save
+            if invite.recipient != nil 
                 @user = User.find(params[:user_id])
-                GroupMailer.existing_user_invite(@group_invitation).deliver 
-                @group_invitation.recipient.group.push(@group_invitation.group_members)
-                render json: {
-                    messages: 'user invited', 
-                    is_messages: true, 
-                    data: { group_invitation: @group_invitation }
-                }, status: :ok 
-            else
-                GroupMailer.with(user: @user).welcome_email.deliver_now 
-                render json: @group_invitation, status: :ok 
-            end 
-        else  
-            render json: { messages: 'invitation failed' }, status: :failed 
-        end 
+                GroupMailer.exsiting_user.project.push(@group.group_members).deliver
+                invite.recipient.group.push(invite)
+
+
     end 
 
     private  
