@@ -27,7 +27,11 @@ class ApplicationController < ActionController::API
 
     def current_user
         @current_user ||= User.find(session[:user_id]) if session[:user_id]
-    end 
+    end
+    
+    # def current_group
+    #     @current_group ||=  
+    # end 
 
     def current_project 
         @current_project ||= current_user.project

@@ -7,8 +7,8 @@ class Api::V1::GroupsController < ApplicationController
     end 
 
     def show
-      @group = Group.find(params[:id])
-      @group_members = GroupMember.where(group_id: @group)
+    #   @group = Group.find(params[:id])
+    #   @group_members = GroupMember.where(group_id: @group)
     end 
 
     def create
@@ -60,6 +60,6 @@ class Api::V1::GroupsController < ApplicationController
     end 
 
     def group_params
-        params.require(:group).permit(:name, :desc, :group_members, :user_id)
+        params.require(:group).permit(:name, :desc, :group_members, :user_id, :image)
     end 
 end

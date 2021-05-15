@@ -21,7 +21,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 group :development do
   gem 'uuidtools'
-  gem 'carrierwave'
+  gem 'paperclip'
   gem 'devise', github: 'heartcombo/devise'
   gem 'jwt'
   gem "mini_magick"
@@ -32,7 +32,7 @@ group :development do
   gem 'fcm'
   gem 'rpush'
   gem 'pundit'
-  gem "algoliasearch-rails"
+  gem 'meilisearch', require: false
   gem 'friendly_id'
   # gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: '776037c0fc799bb09da8c9ea47980bd3bf296874'
   # gem 'axlsx_rails'
