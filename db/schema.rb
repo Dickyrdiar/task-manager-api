@@ -10,20 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_01_015604) do
+ActiveRecord::Schema.define(version: 2021_05_15_043110) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "group_members", force: :cascade do |t|
     t.string "email"
-    t.integer "user_id"
-    t.integer "group_id"
     t.integer "sender_id"
     t.integer "recipient_id"
     t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "group_id"
+    t.index ["group_id"], name: "index_group_members_on_group_id"
+    t.index ["user_id"], name: "index_group_members_on_user_id"
   end
 
   create_table "groups", id: :binary, force: :cascade do |t|
@@ -34,6 +36,10 @@ ActiveRecord::Schema.define(version: 2021_05_01_015604) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.string "slug"
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
     t.index ["owner_id"], name: "index_groups_on_owner_id"
     t.index ["user_id"], name: "index_groups_on_user_id"
   end
@@ -57,6 +63,10 @@ ActiveRecord::Schema.define(version: 2021_05_01_015604) do
     t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "project_id_id"
+    t.bigint "user_id_id"
+    t.index ["project_id_id"], name: "index_project_members_on_project_id_id"
+    t.index ["user_id_id"], name: "index_project_members_on_user_id_id"
   end
 
   create_table "projects", id: :binary, force: :cascade do |t|

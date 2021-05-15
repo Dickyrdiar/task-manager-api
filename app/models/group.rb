@@ -4,10 +4,6 @@ class Group < ApplicationRecord
     def set_uuid
         self.id  = SecureRandom.uuid  
     end 
-
-    # include AlgoliaSearchable
-
-    # validates 
     validates_presence_of :name, :desc
 
     # database relation 
@@ -17,7 +13,11 @@ class Group < ApplicationRecord
     belongs_to :user, optional: true 
 
     has_many :invitations, :class_name => "Invitation", :foreign_key => 'recipient_id'
-    has_many :sent_invites, :class_name => "Invitation", :foreign_key => 'sender_id'
+    has_many :sent_invites, :class_name => "Invitation", :foreign_key => 'sender_id'\
+
     extend FriendlyId
     friendly_id :name, use: :slugged
+
+    has_attached_file :image, styles: { medium: "300*300>", thumb: "100*100" }, default_url: "/images/start_project3.jpg"
+    validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 end
