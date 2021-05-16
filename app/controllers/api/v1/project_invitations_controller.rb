@@ -7,15 +7,30 @@ class Api::V1::ProjectInvitationsController < ApplicationController
 
     def create  
         @project = Project.find_by(params[:project_id])
-        invite = ProjectMember.new(user_id: params[:user_id], project_id: params[:project_id].merge(sender: current_user))
+        invite_project = ProjectMember.new(project_invitations_params.merge(sender: current_user, project_id: @project.id))
 
-        if invite.save 
-            if invite != nil
+        if invite_project.save 
+            if invite_project.recipient_id != nil 
                 @user = User.find(params[:user_id])
-                ProjectMailer.exsiting_user_invite 
-            else 
+                ProjectMailer.existing_user.project.push(@project.project_members).deliver
+                invite_project.recipient.project.push(@project.project_members)
+                render json: {
+                    messages: 'user invited to project', 
+                    is_messages: true, 
+                    data: { invitation: @project_members }
+                }, status: :ok 
+            else  
+                ProjectMailer.with(user: @user).welcome_email.deliver_now
+                render json: @project_members
             end 
-        else 
+        else  
+            render json: { messages: 'Invitation failed' }, status: :failed 
         end 
+    end 
+
+    private  
+
+    def project_invitations_params
+        params.permit(:email)
     end 
 end

@@ -53,8 +53,13 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    aes_key_wrap (1.1.0)
     arel (9.0.0)
+    arel-helpers (2.12.0)
+      activerecord (>= 3.1.0, < 7)
+    attr_required (1.0.1)
     bcrypt (3.1.16)
+    bindata (2.4.9)
     bootsnap (1.7.4)
       msgpack (~> 1.0)
     builder (3.2.4)
@@ -86,10 +91,26 @@ GEM
     ffi (1.15.0)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
+    forest_liana (6.3.5)
+      arel-helpers
+      bcrypt
+      groupdate (>= 5.0.0)
+      httparty
+      ipaddress
+      json
+      json-jwt
+      jsonapi-serializers (>= 0.14.0)
+      jwt
+      openid_connect
+      rack-cors
+      rails (>= 4.0)
+      useragent
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    groupdate (5.2.2)
+      activesupport (>= 5)
     hashie (4.1.0)
     hiredis (0.6.3)
     hkdf (0.3.0)
@@ -97,14 +118,23 @@ GEM
     httparty (0.18.1)
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
+    httpclient (2.8.3)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
+    ipaddress (0.8.3)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
+    json (2.5.1)
+    json-jwt (1.13.0)
+      activesupport (>= 4.2)
+      aes_key_wrap
+      bindata
     jsonapi-resources (0.9.11)
       activerecord (>= 4.1)
       concurrent-ruby
       railties (>= 4.1)
+    jsonapi-serializers (1.0.1)
+      activesupport
     jsonapi-utils (0.7.3)
       jsonapi-resources (= 0.9.11)
     jwt (2.2.3)
@@ -166,6 +196,16 @@ GEM
     omniauth-oauth2 (1.7.1)
       oauth2 (~> 1.4)
       omniauth (>= 1.9, < 3)
+    openid_connect (1.2.0)
+      activemodel
+      attr_required (>= 1.0.0)
+      json-jwt (>= 1.5.0)
+      rack-oauth2 (>= 1.6.1)
+      swd (>= 1.0.0)
+      tzinfo
+      validate_email
+      validate_url
+      webfinger (>= 1.0.1)
     orm_adapter (0.5.0)
     paperclip (4.2.4)
       activemodel (>= 3.2.0)
@@ -176,6 +216,7 @@ GEM
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
+    public_suffix (4.0.6)
     puma (3.12.6)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
@@ -183,6 +224,12 @@ GEM
     rack (2.2.3)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
+    rack-oauth2 (1.16.0)
+      activesupport
+      attr_required
+      httpclient
+      json-jwt (>= 1.11.0)
+      rack (>= 2.1.0)
     rack-protection (2.1.0)
       rack
     rack-test (1.1.0)
@@ -263,13 +310,27 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    swd (1.2.0)
+      activesupport (>= 3)
+      attr_required (>= 0.0.5)
+      httpclient (>= 2.4)
     thor (1.1.0)
     thread_safe (0.3.6)
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
+    useragent (0.16.10)
     uuidtools (2.2.0)
+    validate_email (0.1.6)
+      activemodel (>= 3.0)
+      mail (>= 2.2.5)
+    validate_url (1.0.13)
+      activemodel (>= 3.0.0)
+      public_suffix
     warden (1.2.9)
       rack (>= 2.0.9)
+    webfinger (1.1.0)
+      activesupport
+      httpclient (>= 2.4)
     webpush (1.1.0)
       hkdf (~> 0.2)
       jwt (~> 2.0)
@@ -290,6 +351,7 @@ DEPENDENCIES
   factory_girl_rails (= 4.2.1)
   fcm
   figaro
+  forest_liana (~> 6.3, >= 6.3.5)
   friendly_id
   hiredis
   jbuilder

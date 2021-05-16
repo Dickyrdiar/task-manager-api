@@ -1,9 +1,11 @@
 class ProjectMember < ApplicationRecord
-  belongs_to :user, :class_name => 'User', optional: true
-  belongs_to :project
+  belongs_to :user, optional: true
+  belongs_to :project, optional: true
+  belongs_to :sender, :class_name => 'User', optional: true
+  belongs_to :recipient, :class_name => 'User', optional: true 
 
   before_create :generate_token
-  # before_save :check_user_existance
+  before_save :check_user_existance
 
   private  
 
@@ -12,11 +14,11 @@ class ProjectMember < ApplicationRecord
   end
 
   def check_user_existance
-    exsiting_user = User.find_by(params[:user_id])
+    existing_user = User.find_by(recipient_id)
     if existing_user
       errors.add :uer_id, 'is already a member' 
     else  
-      user_id
+      recipient_id
     end 
   end 
 end
