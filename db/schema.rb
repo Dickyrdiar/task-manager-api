@@ -56,17 +56,15 @@ ActiveRecord::Schema.define(version: 2021_05_15_043110) do
 
   create_table "project_members", force: :cascade do |t|
     t.string "email"
-    t.integer "user_id"
-    t.integer "project_id"
     t.integer "sender_id"
     t.integer "recipient_id"
     t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "project_id_id"
-    t.bigint "user_id_id"
-    t.index ["project_id_id"], name: "index_project_members_on_project_id_id"
-    t.index ["user_id_id"], name: "index_project_members_on_user_id_id"
+    t.bigint "user_id"
+    t.bigint "project_id"
+    t.index ["project_id"], name: "index_project_members_on_project_id"
+    t.index ["user_id"], name: "index_project_members_on_user_id"
   end
 
   create_table "projects", id: :binary, force: :cascade do |t|
