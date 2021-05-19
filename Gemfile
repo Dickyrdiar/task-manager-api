@@ -31,7 +31,7 @@ group :development do
   gem 'sidekiq'
   gem 'fcm'
   gem 'rpush'
-  gem 'pundit'
+  gem 'cancancan'
   gem 'meilisearch', require: false
   gem 'friendly_id'
   gem 'forest_liana', '~> 6.3', '>= 6.3.5'

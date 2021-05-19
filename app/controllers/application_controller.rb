@@ -6,6 +6,10 @@ class ApplicationController < ActionController::API
     #     rescue_from Pundit::NotAuthorizedError
     # end 
 
+    def protect_againts_forgery?
+        false 
+    end 
+
     def not_found
         render json: { error: 'not_found' }
     end 

@@ -29,13 +29,14 @@ class Api::V1::GroupInvitationsController < ApplicationController
         end  
     end 
 
-    def destroy_user
-        user.group_members.find_by(params[:group_id]).destroy 
+    def destroy
+        @user = User.find(params[:id])
+        GroupMember.destroy 
     end 
 
     private  
 
     def group_invitation_params
-        params.permit(:email)
+        params.permit(:email, :project_id, :recipient_id)
     end 
 end

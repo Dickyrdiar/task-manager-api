@@ -21,7 +21,7 @@ Devise.setup do |config|
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
-  # config.parent_controller = 'DeviseController'
+  config.parent_controller = 'ActionController::Base'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -324,7 +324,12 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], :scope => 'user:email'
-  config.omniauth :google_oauth2, '900211762575-2nifps89a62m2ei3gnefqm47ehg2om3g.apps.googleusercontent.com', 'aRzyvzvybjz0RmuSZanLe7tW', :scope => 'user'
+  client_id = Rails.application.secrets['900211762575-2nifps89a62m2ei3gnefqm47ehg2om3g.apps.googleusercontent.com']
+  client_secret = Rails.application.secrets['aRzyvzvybjz0RmuSZanLe7tW']
+
+  config.omniauth :google_oauth2, client_id, client_secret, {
+    scope: "contacts.readonly, userinfo.email"
+  }
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
