@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   mount ForestLiana::Engine => '/forest'
-  devise_for :users, defaults: { format: :json }, controllers: { omniauth_callbacks: 'api/auth/omniauth_callbacks' }
+  devise_for :users, :controllers => { :omniauth_callbacks => "api/auth/omniauth_callbacks" }
   get '/notification/notify' => 'notification#notify'
+
   namespace :api do
     namespace :v1 do
 
@@ -19,5 +20,6 @@ Rails.application.routes.draw do
       resource :sessions
       resource :users
     end 
+
   end                                                                                                                                                                                       
 end

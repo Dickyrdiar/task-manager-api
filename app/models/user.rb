@@ -7,17 +7,15 @@ class User < ApplicationRecord
   has_many :messages
   attr_accessor :name, :desc, :owner_id
 
-  has_many :group_members, dependent: :destroy
-  has_many :groups, through: :group_members
+  # has_many :group_invitations, class_name: "GroupInvitation", foreign_key: "recipient_id"
+  # has_many :sent_invites, class_name: "GroupInvitation", foreign_key: "sender_id"   
+  has_many :group_invitations, :class_name => "GroupInvitation", :foreign_key => "recipient_id"
+  has_many :sent_invites, class_name: "GroupInvitations", :foreign_key => "sender_id" 
 
-  has_many :project_members, dependent: :destroy
+  has_many :project_members, dependent: :destroy, :class_name => 'ProjectMembers', :foreign_key => 'recipient_id'
   has_many :projects, through: :project_members
 
   has_many :notifications, as: :recipient
-  has_many :invitations, :class_name => "Invitation", :foreign_key => 'recipient_id'
-  has_many :sent_invites, :class_name => "Invitation", :foreign_key => 'sender_id'
-  has_many :groupinvitations, :class_name => "Groupinvitation", :foreign_key => 'recipient_id'
-  has_many :sent_groupinvitations, :class_name => "Groupinvitation", :foreign_key => 'sender_id'
 
   # omniauth 
   def self.from_omniauth 
@@ -32,5 +30,6 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
+         :recoverable, :rememberable, :validatable, :omniauthable,
+         :omniauth_providers => [:google_oauth2]
 end
