@@ -2,7 +2,10 @@ class GroupMailer < ApplicationMailer
     default from: 'dickyardiar1@gmail.com'
 
     def welcome_email
-       @account = recipient 
-       mail(to: recipient.email_addres_with_name)
+       @user = params[:user]
+    end 
+
+    def existing_user
+        # @user = params[:user]
     end 
 end

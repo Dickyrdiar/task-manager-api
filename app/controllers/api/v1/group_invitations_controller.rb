@@ -1,42 +1,37 @@
 class Api::V1::GroupInvitationsController < ApplicationController
     def show
         @group = Group.find(params[:group_id])
-        invite  = GroupMember.where(:group_id => @group.id)
-        render json: @group_invitations
+        @group_invitations = GroupInvitation.where(:group_id => @group.id)
+        render json: @group_invitations  
     end 
 
     def create 
         @group = Group.find(params[:group_id])
-        invite = GroupMember.new(group_invitation_params.merge(sender: current_user, group_id: @group.id))
-        # GroupMember.sender_id = current_user.id
+        @group_invitation = GroupInvitation.new(group_invitation_params.merge(sender: current_user, group_id: @group.id, recipient_id: current_user.id))
 
-        if invite.save
-            if invite.recipient != nil 
-                # @user = User.find(params[:user_id])
-                GroupMailer.existing_user_invite(@group).deliver
-                invite.recipient.group.push(@group)
+        if @group_invitation.save 
+            if @group_invitation.recipient != nil
+                @user = User.find(params[:user_id])
+                GroupMailer.existing_user_invite(@group_invitation).deliver
+                @group_invitation.recipient.group.push(@group_invitation)
+                
                 render json: {
                     messages: 'user invited', 
-                    is_messgaes: true, 
-                    data: { invitation: @group_members },
-                }, status: :ok
-            else
+                    is_messages: true, 
+                    data: { invitation: @group_invitation }
+                }, status: :ok 
+            else  
                 GroupMailer.with(user: @user).welcome_email.deliver_now 
-                render json: @group_members
-            end 
+                render json: @group_invitation
+            end
         else 
-            render json: { messages: 'Invitation failed' }, status: :failed 
-        end  
-    end 
-
-    def destroy
-        @user = User.find(params[:id])
-        GroupMember.destroy 
+            render json: { messages: 'invitation failed' }, status: :failed
+        end 
     end 
 
     private  
 
     def group_invitation_params
-        params.permit(:email, :project_id, :recipient_id)
+        params.permit(:group_id, :sender_id, :email)
     end 
 end

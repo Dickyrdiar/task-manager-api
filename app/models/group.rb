@@ -8,7 +8,7 @@ class Group < ApplicationRecord
 
     # database relation 
     has_many :projects
-    has_many :group_members, dependent: :destroy
+    has_many :group_invitations, dependent: :destroy
     has_many :users, through: :group_members
     belongs_to :user, optional: true 
 

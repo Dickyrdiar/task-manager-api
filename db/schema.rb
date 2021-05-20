@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_15_043110) do
+ActiveRecord::Schema.define(version: 2021_05_20_043340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "group_members", force: :cascade do |t|
+  create_table "group_invitations", id: :binary, force: :cascade do |t|
     t.string "email"
     t.integer "sender_id"
     t.integer "recipient_id"
@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 2021_05_15_043110) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.bigint "group_id"
-    t.index ["group_id"], name: "index_group_members_on_group_id"
-    t.index ["user_id"], name: "index_group_members_on_user_id"
+    t.index ["group_id"], name: "index_group_invitations_on_group_id"
+    t.index ["user_id"], name: "index_group_invitations_on_user_id"
   end
 
   create_table "groups", id: :binary, force: :cascade do |t|
@@ -61,10 +61,6 @@ ActiveRecord::Schema.define(version: 2021_05_15_043110) do
     t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.bigint "project_id"
-    t.index ["project_id"], name: "index_project_members_on_project_id"
-    t.index ["user_id"], name: "index_project_members_on_user_id"
   end
 
   create_table "projects", id: :binary, force: :cascade do |t|
