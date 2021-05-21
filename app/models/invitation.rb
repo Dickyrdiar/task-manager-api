@@ -1,4 +1,5 @@
-class GroupInvitation < ApplicationRecord
+class Invitation < ApplicationRecord
+    # devise invitation
     before_create :set_uuid  
     def set_uuid
         self.id = SecureRandom.uuid  
