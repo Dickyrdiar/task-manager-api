@@ -13,7 +13,7 @@ class Project < ApplicationRecord
     has_many :messages, dependent: :destroy  
     belongs_to :group, optional: true 
     
-    has_many :project_members, dependent: :destroy
+    has_many :project_invites, dependent: :destroy
     has_many :users, through: :project_members
     belongs_to :user, optional: true
     
