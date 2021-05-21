@@ -28,7 +28,11 @@ class Api::V1::InvitationsController < ApplicationController
                 }, status: :ok
             else 
                InviteMailer.with(user: @user).welcome_email.deliver_now 
-               render json: @invitation
+               render json: {
+                messages: 'user invited', 
+                is_messages: true, 
+                data: { invitation: @invitation }
+            }, status: :ok
             end  
         else 
             render json: { messages: 'invitation failed' }, status: :failed
@@ -47,6 +51,6 @@ class Api::V1::InvitationsController < ApplicationController
     private 
     
     def invitation_params
-        params.require(:invitation).permit(:group_id, :sender_id, :email) 
+        params.require(:invitation).permit(:group_id, :email, :recipient_id) 
     end 
 end

@@ -10,7 +10,7 @@ class Group < ApplicationRecord
     has_many :projects
     has_many :invitations, dependent: :destroy
     has_many :users, through: :group_members
-    belongs_to :user, optional: true 
+    belongs_to :owner, :class_name => "User"
 
     extend FriendlyId
     friendly_id :name, use: :slugged

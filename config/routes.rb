@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       resources :groups do 
         resource :invitations
         resources :projects do
-          resource :project_invitations
+          resource :project_invites
           resource :messages
         end 
       end     
