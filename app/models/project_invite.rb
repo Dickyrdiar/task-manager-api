@@ -4,7 +4,7 @@ class ProjectInvite < ApplicationRecord
         self.id = SecureRandom.uuid 
     end 
 
-    belongs_to :project
+    belongs_to :project, optional: true
     belongs_to :sender, :class_name => "User", optional: true 
     belongs_to :recipient, :class_name => "User", optional: true 
 
@@ -14,7 +14,7 @@ class ProjectInvite < ApplicationRecord
     private  
 
     def generate_token
-        self.token = Digest::SHA1.hexdigest([self.group_id, Time.now, rand].join)
+        self.token = Digest::SHA1.hexdigest([self.project_id, Time.now, rand].join)
     end 
  
     def check_user_existance 
