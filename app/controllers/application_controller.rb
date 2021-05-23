@@ -1,11 +1,5 @@
 class ApplicationController < ActionController::API
-    # protect_from_forgery with: :exception
-
-    # include do 
-    #     include Pundit
-    #     rescue_from Pundit::NotAuthorizedError
-    # end 
-
+    # include pundit
     def protect_againts_forgery?
         false 
     end 
