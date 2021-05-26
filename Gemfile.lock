@@ -78,6 +78,19 @@ GEM
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
     diff-lcs (1.4.4)
+    elasticsearch (7.13.0)
+      elasticsearch-api (= 7.13.0)
+      elasticsearch-transport (= 7.13.0)
+    elasticsearch-api (7.13.0)
+      multi_json
+    elasticsearch-model (7.1.1)
+      activesupport (> 3)
+      elasticsearch (> 1)
+      hashie
+    elasticsearch-rails (7.1.1)
+    elasticsearch-transport (7.13.0)
+      faraday (~> 1)
+      multi_json
     erubi (1.10.0)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
@@ -88,7 +101,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     fcm (1.0.2)
       faraday (~> 1.0.0)
-    ffi (1.15.0)
+    ffi (1.15.1)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
     forest_liana (6.3.7)
@@ -148,8 +161,6 @@ GEM
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (1.0.1)
-    meilisearch (0.15.2)
-      httparty (>= 0.17.1, < 0.19.0)
     method_source (1.0.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
@@ -159,7 +170,6 @@ GEM
       rake
     mini_magick (4.11.0)
     mini_mime (1.1.0)
-    mini_portile2 (2.5.1)
     minitest (5.14.4)
     msgpack (1.4.2)
     multi_json (1.15.0)
@@ -170,10 +180,7 @@ GEM
     net-http2 (0.18.4)
       http-2 (~> 0.11)
     nio4r (2.5.7)
-    nokogiri (1.11.4)
-      mini_portile2 (~> 2.5.0)
-      racc (~> 1.4)
-    nokogiri (1.11.4-x86_64-linux)
+    nokogiri (1.11.5-x86_64-linux)
       racc (~> 1.4)
     oauth2 (1.4.7)
       faraday (>= 0.8, < 2.0)
@@ -267,8 +274,8 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    rpush (5.4.0)
-      activesupport (>= 5.0)
+    rpush (6.0.0)
+      activesupport (>= 5.2)
       jwt (>= 1.5.6)
       multi_json (~> 1.0)
       net-http-persistent
@@ -330,12 +337,11 @@ GEM
     webpush (1.1.0)
       hkdf (~> 0.2)
       jwt (~> 2.0)
-    websocket-driver (0.7.3)
+    websocket-driver (0.7.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
 
 PLATFORMS
-  ruby
   x86_64-linux
 
 DEPENDENCIES
@@ -344,6 +350,8 @@ DEPENDENCIES
   byebug
   database_cleaner
   devise!
+  elasticsearch-model
+  elasticsearch-rails
   factory_girl_rails (= 4.2.1)
   fcm
   figaro
@@ -354,7 +362,6 @@ DEPENDENCIES
   jsonapi-utils (~> 0.7.3)
   jwt
   listen (>= 3.0.5, < 3.2)
-  meilisearch
   mimemagic (~> 0.4.3)
   mini_magick
   omniauth (~> 2.0, >= 2.0.4)
@@ -376,7 +383,7 @@ DEPENDENCIES
   uuidtools
 
 RUBY VERSION
-   ruby 2.7.0p0
+   ruby 2.5.5p157
 
 BUNDLED WITH
-   2.2.16
+   2.2.17
