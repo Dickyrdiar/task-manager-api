@@ -358,7 +358,7 @@ DEPENDENCIES
   forest_liana (~> 6.3, >= 6.3.5)
   friendly_id
   hiredis
-  jbuilder
+  jbuilder (~> 2.5)
   jsonapi-utils (~> 0.7.3)
   jwt
   listen (>= 3.0.5, < 3.2)

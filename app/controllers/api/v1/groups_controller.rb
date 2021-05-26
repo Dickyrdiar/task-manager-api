@@ -2,12 +2,14 @@ class Api::V1::GroupsController < ApplicationController
     before_action :authorize_request, except: [:index, :show, :create, :update, :destroy]
 
     def index
-        @groups = Group.where(:user_id => current_user.id) 
+        @groups = Group.where(:user_id => current_user.id).
+        order(id: :desc).
+        search(params[:query])
+        response = Group.search params[:q]
     end 
 
     def show
-      @group = Group.find(params[:id])
-      @group_members = GroupMember.where(group_id: @group)
+        @group = Group.find(params[:id])
     end 
 
     def create
@@ -59,6 +61,6 @@ class Api::V1::GroupsController < ApplicationController
     end 
 
     def group_params
-        params.require(:group).permit(:name, :desc, :group_members, :user_id, :image)
+        params.require(:group).permit(:name, :desc, :group_members, :image)
     end 
 end
