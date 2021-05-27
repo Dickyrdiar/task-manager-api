@@ -2,10 +2,9 @@ class Api::V1::GroupsController < ApplicationController
     before_action :authorize_request, except: [:index, :show, :create, :update, :destroy]
 
     def index
-        @groups = Group.where(:user_id => current_user.id).
-        order(id: :desc).
-        search(params[:query])
-        response = Group.search params[:q]
+        @groups = Group.where(:user_id => current_user.id)
+
+        # render json: @groups
     end 
 
     def show
