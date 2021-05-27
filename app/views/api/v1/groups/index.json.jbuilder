@@ -1,3 +1,3 @@
-json.array! @groups do |grpups|
-    json.extract! grpups, :slug, :id, :name, :desc
+json.array! @groups do |g| 
+    json.extract g, :id, :slug, :name, :desc
 end 

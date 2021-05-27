@@ -12,7 +12,6 @@ class Project < ApplicationRecord
     settings index: { number_of_shards: 1 } do
         mappings dynamic: 'false' do 
             indexes :name  
-            indexes :desc
         end  
     end 
    

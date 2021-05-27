@@ -4,6 +4,15 @@ class Message < ApplicationRecord
         self.id = SecureRandom.uuid  
     end 
 
+    include Elasticsearch::Model 
+    include Elasticsearch::Model::Callbacks
+
+    settings index: { number_of_shards: 1 } do
+        mappings dynamic: 'false' do 
+            indexes :message
+        end  
+    end 
+
     # database relation 
     belongs_to :project, optional: true  
     belongs_to :user, optional: true 
