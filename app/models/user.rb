@@ -6,17 +6,14 @@ class User < ApplicationRecord
 
   has_many :messages
   attr_accessor :name, :desc, :owner_id
+  attr_accessor :invitation_token
 
 
   has_many :projects, through: :project_invitations
-
   has_many :notifications, as: :recipient
-
   has_many :invitations, :class_name => "Invitations", :foreign_key => "recipient_id "
   has_many :sent_invites, :class_name => "Invitations", :foreign_key => "sender_id"
 
-  has_many :project_invites, :class_name => "ProjectInvites", :foreign_key => "recipient_id"
-  has_many :sent_invites, :class_name => "ProjectIvites", :foreign_key => "sender_id"
 
   # omniauth 
   def self.from_omniauth 

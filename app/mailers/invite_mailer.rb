@@ -1,7 +1,6 @@
 class InviteMailer < ApplicationMailer
-    default from: 'teamwork@mail.com'
-
-    def welcome_email
-        @user = params[:user]
+    def welcome_email(invitation)
+        @invitation = invitation 
+        mail(to: @user), subject: 'welcome to teamwork please finish the signup'
     end 
 end
