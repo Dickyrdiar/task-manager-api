@@ -2,8 +2,9 @@ class Api::V1::ProjectsController < ApplicationController
    
     def index
         @group = Group.find(params[:group_id])
-        @projects = Project.where(:group_id => @group.id).
-        search(params[:query])
+        @projects = Project.where(:group_id => @group.id)
+
+        render json: @projects
     end
 
     def show 

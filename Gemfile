@@ -27,13 +27,13 @@ group :development do
   gem "mini_magick"
   gem 'jsonapi-utils', '~> 0.7.3'
   gem "figaro"
-  # gem "jbuilder"
+  gem 'tire', '~> 0.6.2'
   gem 'sidekiq'
   gem 'fcm'
   gem 'rpush'
   gem 'pundit'
-  gem 'elasticsearch-model'
-  gem 'elasticsearch-rails'
+  gem 'elasticsearch'
+  gem 'searchkick'
   gem 'friendly_id'
   gem 'forest_liana', '~> 6.3', '>= 6.3.5'
 
