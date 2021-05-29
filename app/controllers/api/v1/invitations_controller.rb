@@ -1,8 +1,5 @@
 class Api::V1::InvitationsController < ApplicationController
     def show
-        # @invitations = Invitation.all 
-        # render json: @invitations 
-    
         @group = Group.find(params[:group_id])
         @invitations = Invitation.where(:group_id => @group.id)
         render json: @invitations
@@ -11,15 +8,11 @@ class Api::V1::InvitationsController < ApplicationController
     def create
         @group = Group.find(params[:group_id])
         @invitation  = @group.invitations.create(invitation_params.merge(sender: current_user))
-        # @invitation.sender_id  = current_user.id 
     
         if @invitation.save
-            # if user already exist
             if @invitation.recipient != nil 
-                # send notification email
                 @user = User.find(params[:user_id]) 
                 InviteMailer.existing_user_invite(@invitation).deliver 
-                # add user to project 
                 @invitation.recipient.group.push(@invitation.group)
                 render json: {
                     messages: 'user invited', 
@@ -27,7 +20,7 @@ class Api::V1::InvitationsController < ApplicationController
                     data: { invitation: @invitation }
                 }, status: :ok
             else 
-               InviteMailer.with(user: @user).welcome_email.deliver_now 
+               InviteMailer.with(invitation: @user).welcome_email.deliver_now 
                render json: {
                 messages: 'user invited', 
                 is_messages: true, 
