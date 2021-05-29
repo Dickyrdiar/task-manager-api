@@ -1,4 +1,3 @@
-
 class Project < ApplicationRecord
 
     # uuid 

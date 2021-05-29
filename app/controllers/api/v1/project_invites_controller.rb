@@ -1,6 +1,5 @@
 class Api::V1::ProjectInvitesController < ApplicationController
     def show
-        @project = Project.find(params[:project_id])
         @project_invites = ProjectInvite.where(:project_id => @project.id) 
 
         render json: @project_invites

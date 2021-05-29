@@ -3,6 +3,7 @@ class Api::V1::ProjectsController < ApplicationController
     def index
         @group = Group.find(params[:group_id])
         @projects = Project.where(:group_id => @group.id)
+        results = Project.search(params[:query])
 
         render json: @projects
     end
@@ -18,7 +19,6 @@ class Api::V1::ProjectsController < ApplicationController
     def create
         @group = Group.find(params[:group_id])
         @project = @group.projects.create(project_params.merge(user: current_user))
-        # @project.user_id = current_user.id
 
         if @project.save 
             render json: {
