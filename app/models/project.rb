@@ -1,20 +1,18 @@
 class Project < ApplicationRecord
-    
+
     # uuid 
     before_create :set_uuid 
     def set_uuid 
         self.id = SecureRandom.uuid 
     end
 
-    include Elasticsearch::Model  
-    include Elasticsearch::Model::Callbacks 
-
-    settings index: { number_of_shards: 1 } do
-        mappings dynamic: 'false' do 
-            indexes :name  
-        end  
+    searchkick word_start: [:name]
+    def search_data 
+        {
+            name: name
+        }
     end 
-   
+
     # validates 
     validates_presence_of :name, :desc, :date_begining
 

@@ -4,13 +4,11 @@ class Message < ApplicationRecord
         self.id = SecureRandom.uuid  
     end 
 
-    include Elasticsearch::Model 
-    include Elasticsearch::Model::Callbacks
-
-    settings index: { number_of_shards: 1 } do
-        mappings dynamic: 'false' do 
-            indexes :message
-        end  
+    searchkick word_start: [:text]
+    def search_data
+        {
+            text: text
+        } 
     end 
 
     # database relation 
