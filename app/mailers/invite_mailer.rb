@@ -1,6 +1,6 @@
 class InviteMailer < ApplicationMailer
-    def welcome_email(invitation)
+    def welcome_email
         @invitation = invitation 
-        mail(to: @user.invitation, subject: 'welcome to teamwork please finish the signup')
+        mail(to: @invitation.email, subject: 'welcome to teamwork please finish the signup')
     end 
 end

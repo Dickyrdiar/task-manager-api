@@ -35,10 +35,10 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     addres:               'smtm.gmail.com', 
     port:                   578,
-    domain:               'example.com',
-    user_name:            '<username>',
-    password:             '<password>',
-    authentication:       'plain',
+    domain:               'Teamworjk.com',
+    user_name:            Rails.application.credentials.gmail[:SMTP_USER_NAME]
+    password:             Rails.application.credentials.gmail[:SMTP_PASSWORD],
+    authentication:       :plain,
     enable_starttls_auto: true  }
 
   config.action_mailer.raise_delivery_errors = true
