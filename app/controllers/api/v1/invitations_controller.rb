@@ -20,7 +20,7 @@ class Api::V1::InvitationsController < ApplicationController
                     data: { invitation: @invitation }
                 }, status: :ok
             else 
-               InviteMailer.with(invitation: @user).welcome_email.deliver_now 
+               InviteMailer.with(invitation: @invitation).welcome_email.deliver_now 
                render json: {
                 messages: 'user invited', 
                 is_messages: true, 
