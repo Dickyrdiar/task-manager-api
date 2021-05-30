@@ -1,7 +1,7 @@
 class InviteMailer < ApplicationMailer
     default from: "dickyardiar1@gmail.com"
 
-    layout "mailer"
+    layout 'welcome_email'
 
     def welcome_email
         @invitation = params[:invitation]
