@@ -624,7 +624,7 @@
       "is_sortable": true,
       "is_virtual": false,
       "reference": "User.id",
-      "inverse_of": "project_invites",
+      "inverse_of": null,
       "relationship": "BelongsTo",
       "widget": null,
       "validations": []
@@ -640,7 +640,7 @@
       "is_sortable": true,
       "is_virtual": false,
       "reference": "User.id",
-      "inverse_of": "project_invites",
+      "inverse_of": null,
       "relationship": "BelongsTo",
       "widget": null,
       "validations": []

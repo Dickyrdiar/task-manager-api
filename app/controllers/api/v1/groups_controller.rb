@@ -8,7 +8,7 @@ class Api::V1::GroupsController < ApplicationController
     end 
 
     def show
-        @group = Group.find(params[:id])
+        @group = Group.find_by(params[:slug])
     end 
 
     def create
