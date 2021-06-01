@@ -7,7 +7,12 @@ Rails.application.routes.draw do
     namespace :v1 do
 
       resources :groups  do 
-        resource :invitations
+        resource :invitations do 
+          member do 
+            get 'leave'
+          end 
+        end 
+
         resources :projects do
           resource :project_invites
           resource :messages
