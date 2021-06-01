@@ -323,11 +323,10 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  # config.omniauth :github, ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], :scope => 'user:email'
-  client_id = Rails.application.secrets['900211762575-2nifps89a62m2ei3gnefqm47ehg2om3g.apps.googleusercontent.com']
-  client_secret = Rails.application.secrets['aRzyvzvybjz0RmuSZanLe7tW']
 
-  config.omniauth :google_oauth2, client_id, client_secret, {
+  config.omniauth :github, ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], :scope => 'user:email'
+
+  config.omniauth :google_oauth2, ENV['google_id'], ENV['google_secrets'], {
     scope: "contacts.readonly, userinfo.email"
   }
   # ==> Warden configuration

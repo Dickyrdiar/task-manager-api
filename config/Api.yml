@@ -1,3 +1,6 @@
 development:
   GITHUB_ID: 0df5c6dc7b743418ec31
   GITHUB_SECRET: 30a24e6d9cf9c004df0a15a699f1496559412db2
+
+  google_id: 900211762575-2nifps89a62m2ei3gnefqm47ehg2om3g.apps.googleusercontent.com
+  google_secrets: aRzyvzvybjz0RmuSZanLe7tW

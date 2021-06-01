@@ -21,6 +21,7 @@ class User < ApplicationRecord
       user.provider = auth.provider 
       user.uid = auth.uid 
       user.email = auth.info.email 
+      user.username = auth.info.username
       user.password = Devise.friendly_token[0, 20]
     end 
   end 
@@ -29,5 +30,5 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable,
-         :omniauth_providers => [:google_oauth2]
+         :omniauth_providers => [:google_oauth2, :github]
 end
