@@ -20,7 +20,7 @@ class Api::V1::InvitationsController < ApplicationController
                     data: { invitation: @invitation }
                 }, status: :ok
             else 
-               InviteMailer.with(invitation: @invitation).welcome_email.deliver_now 
+               InviteMailer.invite_email(@invitation).deliver_now 
                render json: {
                 messages: 'user invited', 
                 is_messages: true, 
@@ -32,13 +32,11 @@ class Api::V1::InvitationsController < ApplicationController
         end  
     end 
     
-    
-    def destroy
-        @invitation.find(params[:id])
-        @invitation.destroy 
-        render json: {
-            messages: 'user has remove'
-        }  
+    def leave
+        @group = Group.find(params[:id])
+        current_user.update_attribute(group_id: @group.id)
+        
+        render json: { message: 'you leave group' }
     end 
     
     private 
