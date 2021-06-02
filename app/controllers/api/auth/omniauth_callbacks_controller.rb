@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ::Api::Auth::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   respond_to :json
 
@@ -15,18 +13,23 @@ class ::Api::Auth::OmniauthCallbacksController < Devise::OmniauthCallbacksContro
     end 
   end 
 
-  def google_oauth2 
-    @user = User.from_omanituh(request.env['omniauth.auth']) 
-
-    if @user.persisted? 
+  def google_oauth2
+    @user = User.from_omniauth(request.env['omniauth.auth'])
+    if @user.persisted?
       flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Google'
-      sign_in_and_redirect @user, event: :authentication
-    else  
-      session['devise.google_data'] = request.env['omniauth.auth'].except('extra')
-      render json:  @user.errors, status: :unproccessable_entity 
-    end 
+      sign_in_and_redirect user, event: :authentication
+    else
+      session['devise.google_data'] = request.env['omniauth.auth'].except(:extra)
+      params[:error] = :account_not_found 
+      do_failure_things
+    end
   end 
 
-  def twitter 
-  end 
+  # def twitter 
+  # end 
+
+  # def failure
+  #   # binding.pry
+  #   render :text => params.inspect
+  # end 
 end
