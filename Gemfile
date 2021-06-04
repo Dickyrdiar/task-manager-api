@@ -19,31 +19,32 @@ gem 'hiredis'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-group :development do
-  gem 'uuidtools'
-  gem 'paperclip'
-  gem 'devise', github: 'heartcombo/devise'
-  gem 'jwt'
-  gem "mini_magick"
-  gem 'jsonapi-utils', '~> 0.7.3'
-  gem "figaro"
-  gem 'tire', '~> 0.6.2'
-  gem 'sidekiq'
-  gem 'fcm'
-  gem 'rpush'
-  gem 'pundit'
-  gem 'elasticsearch'
-  gem 'searchkick'
-  gem 'friendly_id'
-  gem 'forest_liana', '~> 6.3', '>= 6.3.5'
+gem 'uuidtools'
+gem 'paperclip'
+gem 'devise', github: 'heartcombo/devise'
+gem 'jwt'
+gem "mini_magick"
+gem 'jsonapi-utils', '~> 0.7.3'
+gem "figaro"
+gem 'tire', '~> 0.6.2'
+gem 'sidekiq'
+gem 'fcm'
+gem 'rpush'
+gem 'pundit'
+gem 'elasticsearch'
+gem 'searchkick'
+gem 'friendly_id'
+gem 'forest_liana', '~> 6.3', '>= 6.3.5'
 
-  # omniauth
-  gem 'omniauth-oauth2', '~> 1.7', '>= 1.7.1' 
-  gem 'omniauth', '~> 2.0', '>= 2.0.4'
-  gem 'omniauth-github', '~> 2.0'
-  gem 'omniauth-google-oauth2'
-  gem 'omniauth-twitter'
-end 
+# omniauth
+gem 'omniauth-oauth2', '~> 1.7', '>= 1.7.1' 
+gem 'omniauth', '~> 2.0', '>= 2.0.4'
+gem 'omniauth-github', '~> 2.0'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-twitter'
+gem "omniauth-rails_csrf_protection"
+gem 'pry', '~> 0.13.1'
+
 
 
 # Use ActiveStorage variant
