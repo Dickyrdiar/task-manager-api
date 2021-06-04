@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
 
+      get '/groups', to: 'groups#index'
       resources :groups  do 
         resource :invitations do 
           member do 
@@ -13,9 +14,12 @@ Rails.application.routes.draw do
           end 
         end 
 
+        get '/projects', to: 'projects#index'
         resources :projects do
           resource :project_invites
           resource :messages
+          get '/todolists', to: 'todolists#index'
+          resource :todolists
         end 
       end     
       mount ActionCable.server => '/cable'
@@ -25,6 +29,5 @@ Rails.application.routes.draw do
       resource :sessions
       resource :users
     end 
-
   end                                                                                                                                                                                       
 end
