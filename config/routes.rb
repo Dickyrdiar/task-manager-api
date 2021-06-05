@@ -17,6 +17,7 @@ Rails.application.routes.draw do
         get '/projects', to: 'projects#index'
         resources :projects do
           resource :project_invites
+          get '/messages', to: 'messages#index'
           resource :messages
           get '/todolists', to: 'todolists#index'
           resource :todolists

@@ -6,7 +6,6 @@ class Group < ApplicationRecord
     end 
     validates_presence_of :name, :desc
 
-
     # database relation 
     has_many :projects
     has_many :invitations, dependent: :destroy

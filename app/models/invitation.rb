@@ -5,6 +5,10 @@ class Invitation < ApplicationRecord
         self.id = SecureRandom.uuid  
     end 
 
+    ROLE = {
+        members: 'members'
+    }
+
     # database relation 
     belongs_to :group, optional: true 
     belongs_to :sender, :class_name => 'User', optional: true 

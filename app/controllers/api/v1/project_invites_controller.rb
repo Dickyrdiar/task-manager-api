@@ -8,6 +8,7 @@ class Api::V1::ProjectInvitesController < ApplicationController
     def create 
         @project = Project.find(params[:project_id])
         @project_invite = @project.project_invites.create(project_invite_params.merge(sender: current_user))
+        @project_invite.role = ProjectInvite::ROLE[:members]
 
         if @project_invite.save
             if @project_invite.recipient != nil  

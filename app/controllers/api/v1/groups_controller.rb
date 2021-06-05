@@ -59,6 +59,6 @@ class Api::V1::GroupsController < ApplicationController
     end 
 
     def group_params
-        params.require(:group).permit(:name, :desc, :group_members, :image)
+        params.require(:group).permit(:name, :desc, :image, :role, :owner)
     end 
 end
