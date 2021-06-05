@@ -6,7 +6,8 @@ class Api::V1::TodolistsController < ApplicationController
   end
 
   def create
-    @todolist = Todolist.create(todolist_params.merge(user: current_user)) 
+    @project = Project.find(params[:project_id])
+    @todolist = @project.todolists.create(todolist_params.merge(user: current_user)) 
 
     if @todolist.save 
       render json: @todolist, status: :created 

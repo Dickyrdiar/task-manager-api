@@ -1,1 +1,1 @@
-json.extract! @project, :slug, :name, :desc, :date_begining, :project_invites
+json.extract! @project, :slug, :name, :desc, :todolists, :date_begining, :messages, :project_invites

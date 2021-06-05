@@ -9,7 +9,7 @@ class Api::V1::ProjectsController < ApplicationController
             @projects = Project.where(:group_id => @group.id)
         end 
 
-        render json: @projects
+        # render json: @projects
     end
 
     def show 
@@ -65,10 +65,6 @@ class Api::V1::ProjectsController < ApplicationController
     end 
 
     private  
-
-    def search
-        results = Project.search(search_params[:q], search_params)
-    end 
 
     def set_project
         @project = Project.find(params[:id]) 

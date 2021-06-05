@@ -4,6 +4,10 @@ class ApplicationController < ActionController::API
         false 
     end 
 
+    def pundit_user
+        AuthorizationContext.new(current_user, current_project) 
+    end 
+
     def not_found
         render json: { error: 'not_found' }
     end 
@@ -29,6 +33,6 @@ class ApplicationController < ActionController::API
     
 
     def current_project 
-        @current_project ||= current_user.project
+        @current_project ||= Project.find(session[:project_id]) if session[:project_id]
     end 
 end

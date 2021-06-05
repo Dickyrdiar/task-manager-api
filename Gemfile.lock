@@ -387,7 +387,7 @@ DEPENDENCIES
   omniauth (~> 2.0, >= 2.0.4)
   omniauth-github (~> 2.0)
   omniauth-google-oauth2
-  omniauth-oauth2 (~> 1.7, >= 1.7.1)
+  omniauth-oauth2 (~> 1.4)
   omniauth-rails_csrf_protection
   omniauth-twitter
   paperclip

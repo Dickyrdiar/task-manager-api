@@ -28,8 +28,7 @@ class ::Api::Auth::OmniauthCallbacksController < Devise::OmniauthCallbacksContro
   # def twitter 
   # end 
 
-  # def failure
-  #   # binding.pry
-  #   render :text => params.inspect
-  # end 
+  def failure
+    
+  end 
 end
