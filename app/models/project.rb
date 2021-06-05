@@ -19,13 +19,11 @@ class Project < ApplicationRecord
     # database relation 
     has_many :messages, dependent: :destroy  
     belongs_to :group, optional: true 
-    
     has_many :project_invites, dependent: :destroy
     has_many :users, through: :project_members
     belongs_to :user, optional: true
-    
-    # invitation relation 
     has_many :invitations
+    has_many :todolists
 
     extend FriendlyId
     friendly_id :name, use: :slugged

@@ -3,8 +3,7 @@ class Api::V1::GroupsController < ApplicationController
 
     def index
         @groups = Group.where(:user_id => current_user.id)
-
-        render json: @groups
+        # render json: @groups
     end 
 
     def show
