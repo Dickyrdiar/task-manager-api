@@ -14,6 +14,11 @@ class User < ApplicationRecord
   has_many :invitations, :class_name => "Invitations", :foreign_key => "recipient_id "
   has_many :sent_invites, :class_name => "Invitations", :foreign_key => "sender_id"
 
+  # role user 
+  ROLE = {
+    owner: 'owner', 
+    members: 'members'
+  }
 
   # omniauth 
   def self.from_omniauth 
