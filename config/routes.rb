@@ -7,17 +7,11 @@ Rails.application.routes.draw do
     namespace :v1 do
 
       get '/groups', to: 'groups#index'
-      resources :groups  do 
-        resource :invitations do 
-          member do 
-            get 'leave'
-          end 
-        end 
+      resources :groups  do  
 
         get '/projects', to: 'projects#index'
         resources :projects do
-          resource :project_invites
-          get '/messages', to: 'messages#index'
+          get '/messages', to: 'messages#inde'
           resource :messages
           get '/todolists', to: 'todolists#index'
           resource :todolists

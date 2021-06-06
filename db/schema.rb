@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_05_133256) do
+ActiveRecord::Schema.define(version: 2021_06_06_022616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(version: 2021_06_05_133256) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.bigint "group_id"
-    t.string "role"
     t.index ["group_id"], name: "index_invitations_on_group_id"
     t.index ["user_id"], name: "index_invitations_on_user_id"
   end
@@ -64,7 +63,6 @@ ActiveRecord::Schema.define(version: 2021_06_05_133256) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.bigint "project_id"
-    t.string "role"
     t.index ["project_id"], name: "index_project_invites_on_project_id"
     t.index ["user_id"], name: "index_project_invites_on_user_id"
   end

@@ -12,7 +12,7 @@ class Api::Auth::UsersController < ApplicationController
 
     def create
         @user = User.new(user_params)
-        @user.role = User::ROLE[:owner]
+        @user = User::ROLE[:owner]
 
         if @user.save 
             render json: {
@@ -21,7 +21,6 @@ class Api::Auth::UsersController < ApplicationController
                 data: { user: @user }
             }, status: :ok
         else
-            p @user.errors.full_messages
             render json: {
                 message: 'user failed', 
                 is_message: false, 

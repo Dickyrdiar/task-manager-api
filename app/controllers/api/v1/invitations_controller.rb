@@ -8,7 +8,6 @@ class Api::V1::InvitationsController < ApplicationController
     def create
         @group = Group.find(params[:group_id])
         @invitation  = @group.invitations.create(invitation_params.merge(sender: current_user))
-        @invitation = Invitation::ROLE[:members]
     
         if @invitation.save
             if @invitation.recipient != nil 
