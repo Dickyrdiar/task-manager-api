@@ -1,0 +1,3 @@
+class TodolistPolicy < ApplicationPolicy
+    
+end 

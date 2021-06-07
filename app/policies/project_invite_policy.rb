@@ -1,0 +1,2 @@
+class ProjectInvitePolicy < ApplicationPolicy
+end 
