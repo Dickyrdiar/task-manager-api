@@ -78,6 +78,9 @@ GEM
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
+    devise_invitable (2.0.5)
+      actionmailer (>= 5.0)
+      devise (>= 4.6)
     diff-lcs (1.4.4)
     elasticsearch (7.13.0)
       elasticsearch-api (= 7.13.0)
@@ -283,6 +286,7 @@ GEM
       railties (>= 5.0)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    rolify (6.0.0)
     rpush (6.0.0)
       activesupport (>= 5.2)
       jwt (>= 1.5.6)
@@ -371,6 +375,7 @@ DEPENDENCIES
   byebug
   database_cleaner
   devise!
+  devise_invitable
   elasticsearch
   factory_girl_rails (= 4.2.1)
   fcm
@@ -398,6 +403,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 5.2.4, >= 5.2.4.5)
   redis (~> 4.0)
+  rolify
   rpush
   rspec-rails (~> 4.0.2)
   searchkick

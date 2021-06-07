@@ -1,14 +1,15 @@
 class User < ApplicationRecord
+  rolify
   before_create :set_uuid 
   def set_uuid 
     self.id = SecureRandom.uuid 
   end
 
-  has_many :messages
+
   attr_accessor :name, :desc, :owner_id
   attr_accessor :invitation_token
 
-
+  has_many :messages
   has_many :projects, through: :project_invitations
   has_many :notifications, as: :recipient
   has_many :invitations, :class_name => "Invitations", :foreign_key => "recipient_id "
@@ -16,7 +17,7 @@ class User < ApplicationRecord
 
   # role user 
   ROLE = {
-    owner: 'owner', 
+    owner: 'owner',
     members: 'members'
   }
 

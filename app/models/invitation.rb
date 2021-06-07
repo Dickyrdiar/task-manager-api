@@ -3,11 +3,7 @@ class Invitation < ApplicationRecord
     before_create :set_uuid  
     def set_uuid
         self.id = SecureRandom.uuid  
-    end 
-
-    ROLE = {
-        members: 'members'
-    }
+    end
 
     # database relation 
     belongs_to :group, optional: true 

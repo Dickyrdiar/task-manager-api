@@ -22,6 +22,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'uuidtools'
 gem 'paperclip'
 gem 'devise', github: 'heartcombo/devise'
+gem 'devise_invitable'
 gem 'jwt'
 gem "mini_magick"
 gem 'jsonapi-utils', '~> 0.7.3'
@@ -35,6 +36,7 @@ gem 'elasticsearch'
 gem 'searchkick'
 gem 'friendly_id'
 gem 'forest_liana', '~> 6.3', '>= 6.3.5'
+gem  'rolify'
 
 # omniauth
 gem 'omniauth-oauth2', '~> 1.4'

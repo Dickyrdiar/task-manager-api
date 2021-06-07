@@ -1,12 +1,13 @@
 class Api::V1::MessagesController < ApplicationController
-    def show
+
+    def index
         @project = Project.find(params[:project_id])
-        if params[:search].present 
+        if params[:search].present? 
             @message = Message.search(params[:search])
         else  
             @message = Message.where(:peoject_id => @project.id)
         end 
-        render json: @messages.all 
+        # render json: @messages
     end 
     
     def create
