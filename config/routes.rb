@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
       get '/groups', to: 'groups#index'
       resources :groups  do  
+        resources :invitations
 
         get '/projects', to: 'projects#index'
         resources :projects do
