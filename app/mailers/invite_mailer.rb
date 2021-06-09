@@ -1,8 +1,9 @@
 class InviteMailer < ApplicationMailer
-    default from: "dickyardiar1@gmail.com"
+    default from: 'notificationexample@example.com'
 
-    def inivite_email
-        @invitation = invitation
-        mail(to: @invitation.email, subject: 'join group')
+    def invite_email
+        @invitation = params[:invitation]
+        @url = 'http://teamwork.com'
+        # mail(to: @invitation.email, subject: 'signup to continue') 
     end 
 end

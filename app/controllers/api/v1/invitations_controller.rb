@@ -2,7 +2,7 @@ class Api::V1::InvitationsController < ApplicationController
     def show
         @group = Group.find(params[:group_id])
         @invitations = Invitation.where(:group_id => @group.id)
-        render json: @invitations
+        # render json: @invitations
     end 
     
     def create
@@ -11,21 +11,14 @@ class Api::V1::InvitationsController < ApplicationController
     
         if @invitation.save
             if @invitation.recipient != nil 
-                @user = User.find(params[:user_id]) 
                 InviteMailer.existing_user_invite(@invitation).deliver 
                 @invitation.recipient.group.push(@invitation.group)
-                render json: {
-                    messages: 'user invited', 
-                    is_messages: true, 
-                    data: { invitation: @invitation }
-                }, status: :ok
+                
+                render :show, status: :ok
             else 
-               InviteMailer.invite_email(@invitation).deliver_now 
-               render json: {
-                messages: 'user invited', 
-                is_messages: true, 
-                data: { invitation: @invitation }
-            }, status: :ok
+               InviteMailer.with(invitaiton: @invitation, :invitaiton_token => @invitation.token).invite_email.deliver
+                # InviteMailer.with(@invitation, new_user_registration_path(:invitation_token => @invitation.token)).deliver
+                render :show, status: :ok
             end  
         else 
             render json: { messages: 'invitation failed' }, status: :failed
@@ -42,6 +35,6 @@ class Api::V1::InvitationsController < ApplicationController
     private 
     
     def invitation_params
-        params.require(:invitation).permit(:group_id, :email, :recipient_id) 
+        params.permit(:group_id, :email, :recipient_id) 
     end 
 end
