@@ -16,8 +16,7 @@ class Api::V1::InvitationsController < ApplicationController
                 
                 render :show, status: :ok
             else 
-                InviteMailer.invite_email(@invitation, new_user_registration_path(:invite_token => @invitation.token)).deliver_now 
-                
+                InviteMailer.with(@invitation, new_user_registration_path(:invite_token => @invitation.token)).invite_email.deliver_now 
                 render :show, status: :ok
             end  
         else 
@@ -35,6 +34,6 @@ class Api::V1::InvitationsController < ApplicationController
     private 
     
     def invitation_params
-        params.require(:invitation).permit(:group_id, :email, :recipient_id) 
+        params.permit(:group_id, :email, :recipient_id) 
     end 
 end

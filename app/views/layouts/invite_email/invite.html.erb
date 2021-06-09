@@ -1,0 +1,3 @@
+<h1>Welcome <%= @invitation.email %></h1>
+
+<%= t(".body", confirmation_url: confirmation_url(token: @invitation.token)) %>
