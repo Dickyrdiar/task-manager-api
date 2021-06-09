@@ -16,7 +16,8 @@ class Api::V1::InvitationsController < ApplicationController
                 
                 render :show, status: :ok
             else 
-                InviteMailer.with(@invitation, new_user_registration_path(:invite_token => @invitation.token)).invite_email.deliver_now 
+               InviteMailer.with(invitaiton: @invitation, :invitaiton_token => @invitation.token).invite_email.deliver
+                # InviteMailer.with(@invitation, new_user_registration_path(:invitation_token => @invitation.token)).deliver
                 render :show, status: :ok
             end  
         else 
