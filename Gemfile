@@ -38,6 +38,7 @@ gem 'friendly_id'
 gem 'forest_liana', '~> 6.3', '>= 6.3.5'
 gem 'rolify'
 gem 'sidekiq'
+gem 'figaro'
 
 # omniauth
 gem 'omniauth-oauth2', '~> 1.4'
