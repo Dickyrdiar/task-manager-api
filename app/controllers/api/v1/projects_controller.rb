@@ -24,13 +24,14 @@ class Api::V1::ProjectsController < ApplicationController
         @group = Group.find(params[:group_id])
         @project = @group.projects.create(project_params.merge(user: current_user))
 
-        if @project.save 
+        if @project.save
             render json: {
                 messages: 'project create',
                 is_messages: true, 
                 data: { project: @project }
             }, status: :ok
         else 
+            p @project.errors.full_messages
             render json: {
                 messages: 'project failed', 
                 is_messages: false, 

@@ -32,4 +32,5 @@ class Project < ApplicationRecord
     attr_reader :raw_invitation_token
 
     # mount_uploaders :image, ImageUploader
+    has_one_attached :image
 end

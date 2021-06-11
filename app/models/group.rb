@@ -15,6 +15,5 @@ class Group < ApplicationRecord
     extend FriendlyId
     friendly_id :name, use: :slugged
 
-    has_attached_file :image, styles: { medium: "300*300>", thumb: "100*100" }, default_url: "/images/start_project3.jpg"
-    validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+    has_one_attached :image
 end

@@ -20,7 +20,6 @@ gem 'hiredis'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'uuidtools'
-gem 'paperclip'
 gem 'devise', github: 'heartcombo/devise'
 gem 'devise_invitable'
 gem 'jwt'
