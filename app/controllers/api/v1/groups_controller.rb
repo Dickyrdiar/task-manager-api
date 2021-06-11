@@ -1,5 +1,5 @@
 class Api::V1::GroupsController < ApplicationController
-    before_action :authorize_request, except: [:index, :show, :create, :update, :destroy]
+    before_action :authorize_request, except: [:index, :show]
 
     def index
         @groups = Group.where(:user_id => current_user.id)
