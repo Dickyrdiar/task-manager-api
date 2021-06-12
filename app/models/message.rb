@@ -6,7 +6,7 @@ class Message < ApplicationRecord
 
     searchkick word_start: [:text]
     def search_data
-        {
+        {   
             text: text
         } 
     end 
@@ -21,4 +21,5 @@ class Message < ApplicationRecord
     after_create_commit { MessageBroadcastJob.perform_later(self) }
 
     has_one_attached :image
+    # validates :image, attached: true, content_type: %i[png jpg jpeg], :presence => true
 end
