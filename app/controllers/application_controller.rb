@@ -35,4 +35,11 @@ class ApplicationController < ActionController::API
     def current_project 
         @current_project ||= Project.find(session[:project_id]) if session[:project_id]
     end 
+
+    private 
+
+    def user_not_authorized
+        flash[:warning] = "You are not authorized to perform this action."
+        redirect_to(request.referrer || root_path)
+    end
 end
