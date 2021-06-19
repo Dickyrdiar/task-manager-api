@@ -7,7 +7,6 @@ class Api::V1::MessagesController < ApplicationController
         else  
             @message = Message.where(:peoject_id => @project.id)
         end 
-        # render json: @messages
     end 
     
     def create
@@ -17,6 +16,8 @@ class Api::V1::MessagesController < ApplicationController
         if @message.save 
             ActionCable.server.broadcast "project_channel", content: @message.text
             render json: @message, status: :ok 
+
+            p @project.errors.full_messages
         else  
             render json: { error: 'invalid message' }, status: :failed
         end 
@@ -32,6 +33,6 @@ class Api::V1::MessagesController < ApplicationController
     private  
 
     def message_params 
-        params.permit(:text, :sender_id, :image, :user)
+        params.require(:message).permit(:text, :sender_id, :image, :user)
     end 
 end
