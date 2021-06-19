@@ -1,1 +1,1 @@
-json.extract! @group, :id, :slug, :image, :name, :desc, :invitations, :projects
+json.extract! @group, :id, :slug, :user, :image, :name, :desc, :invitations, :projects

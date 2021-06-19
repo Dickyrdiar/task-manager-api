@@ -1,3 +1,3 @@
 json.array! @groups do |g|
-    json.extract! g, :slug, :id, :image, :name, :desc, :date_begining 
+    json.extract! g, :id, :slug, :name, :desc
 end 
