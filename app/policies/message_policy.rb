@@ -1,37 +1,23 @@
 class MessagePolicy < ApplicationPolicy
-    attr_reader :user, :record
-
-    def initialize(user, record)
-        @user = user 
-        @record = record
+    def index? 
+        true 
     end 
 
-    def index?
-        return true if @user.is_owner? 
-        return true if @user.is_members? 
-    end 
-
-    def show? 
-        true
-    end 
-
-    def create
-        index?
-    end 
-
-    def new? 
-       create? 
+    def create? 
+        user.present? 
     end 
 
     def update? 
-        show? 
+        return true if user.prrsent? && user == message.user    
     end 
 
-    def edit? 
-        show? 
+    def destroy 
+        return true if user.present? && user == user.message
     end 
 
-    def destroy? 
-       show?
+    private 
+
+    def message 
+        record 
     end 
 end                                                                                                                                                                                                                                                               
