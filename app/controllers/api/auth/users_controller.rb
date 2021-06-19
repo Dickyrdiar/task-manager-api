@@ -23,7 +23,7 @@ class Api::Auth::UsersController < ApplicationController
             @user.group.push(group) 
             @user.role = User::ROLE[:members]
 
-            render json: @user, status: :ok 
+            render :show, status: :ok 
         elsif @user.save
             render :show, status: :created
         else

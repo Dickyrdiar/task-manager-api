@@ -38,6 +38,7 @@ gem 'forest_liana', '~> 6.3', '>= 6.3.5'
 gem 'rolify'
 gem 'sidekiq'
 gem 'figaro'
+gem 'pony', '~> 1.13', '>= 1.13.1'
 
 # omniauth
 gem 'omniauth-oauth2', '~> 1.4'

@@ -3,7 +3,7 @@ class Invitation < ApplicationRecord
     belongs_to :group, optional: true 
     belongs_to :sender, :class_name => 'User', optional: true 
     belongs_to :recipient, :class_name => 'User', optional: true
-    has_many :users
+    belongs_to :user
 
     before_create :generate_token 
     before_save :check_user_existance 
@@ -35,7 +35,5 @@ class Invitation < ApplicationRecord
         end 
     end 
 
-    def invite
-        SendInvitationsJob.perform_later(id) 
-    end 
+    after_create_commit { SendInviteEmailJob.perform_later(self) }
 end

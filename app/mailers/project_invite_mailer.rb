@@ -1,9 +1,6 @@
 class ProjectInviteMailer < ApplicationMailer
-    default from: 'example@mail.com'
-
-    def project_invite
-        @project_invite = params[:project_invite]
-        @url = 'http://localhost:3001'
-        mail(:to => @project_invite.email, :subject => "welcome to project")
+    def projects_ivnites(project_invite_id, email)
+        @project_invite = ProjectInvite.find(project_invite_id)
+        mail to: email, subject: "#{@project_invite.email} send link to invite you to project"
     end 
 end
