@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
         get '/projects', to: 'projects#index'
         resources :projects do
-          get '/messages', to: 'messages#inde'
+          get '/messages', to: 'messages#index'
           resource :messages
           get '/todolists', to: 'todolists#index'
           resource :todolists
