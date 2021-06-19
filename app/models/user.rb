@@ -1,11 +1,4 @@
 class User < ApplicationRecord
-  rolify
-  before_create :set_uuid 
-  def set_uuid 
-    self.id = SecureRandom.uuid 
-  end
-
-
   attr_accessor :name, :desc, :owner_id
   attr_accessor :invitation_token
 

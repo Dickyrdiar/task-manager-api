@@ -1,9 +1,4 @@
 class ProjectInvite < ApplicationRecord
-    before_create :set_uuid  
-    def set_uuid  
-        self.id = SecureRandom.uuid 
-    end 
-
     belongs_to :project, optional: true
     belongs_to :sender, :class_name => "User", optional: true 
     belongs_to :recipient, :class_name => "User", optional: true 

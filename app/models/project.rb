@@ -1,11 +1,4 @@
 class Project < ApplicationRecord
-
-    # uuid 
-    before_create :set_uuid 
-    def set_uuid 
-        self.id = SecureRandom.uuid 
-    end
-
     searchkick word_start: [:name]
     def search_data 
         {

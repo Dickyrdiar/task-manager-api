@@ -1,7 +1,6 @@
 class CreateMessages < ActiveRecord::Migration[5.2]
   def change
-    create_table :messages, id: false do |t|
-      t.binary :id, limit: 36, primary_key: true, :null => false
+    create_table :messages do |t|
       t.text :text
 
       t.timestamps

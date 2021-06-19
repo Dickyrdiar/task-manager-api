@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2021_06_10_133754) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "groups", id: :binary, force: :cascade do |t|
+  create_table "groups", force: :cascade do |t|
     t.string "name"
     t.text "desc"
     t.bigint "owner_id"
@@ -50,15 +50,11 @@ ActiveRecord::Schema.define(version: 2021_06_10_133754) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.string "slug"
-    t.string "image_file_name"
-    t.string "image_content_type"
-    t.integer "image_file_size"
-    t.datetime "image_updated_at"
     t.index ["owner_id"], name: "index_groups_on_owner_id"
     t.index ["user_id"], name: "index_groups_on_user_id"
   end
 
-  create_table "invitations", id: :binary, force: :cascade do |t|
+  create_table "invitations", force: :cascade do |t|
     t.string "email"
     t.integer "sender_id"
     t.integer "recipient_id"
@@ -71,7 +67,7 @@ ActiveRecord::Schema.define(version: 2021_06_10_133754) do
     t.index ["user_id"], name: "index_invitations_on_user_id"
   end
 
-  create_table "messages", id: :binary, force: :cascade do |t|
+  create_table "messages", force: :cascade do |t|
     t.text "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -81,7 +77,7 @@ ActiveRecord::Schema.define(version: 2021_06_10_133754) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
-  create_table "project_invites", id: :binary, force: :cascade do |t|
+  create_table "project_invites", force: :cascade do |t|
     t.string "email"
     t.integer "sender_id"
     t.integer "recipient_id"
@@ -103,7 +99,7 @@ ActiveRecord::Schema.define(version: 2021_06_10_133754) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "projects", id: :binary, force: :cascade do |t|
+  create_table "projects", force: :cascade do |t|
     t.string "name"
     t.text "desc"
     t.date "date_begining"
@@ -197,7 +193,7 @@ ActiveRecord::Schema.define(version: 2021_06_10_133754) do
     t.index ["user_id"], name: "index_todolists_on_user_id"
   end
 
-  create_table "users", id: :binary, force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

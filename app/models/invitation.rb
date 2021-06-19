@@ -1,10 +1,4 @@
 class Invitation < ApplicationRecord
-    # devise invitation
-    before_create :set_uuid  
-    def set_uuid
-        self.id = SecureRandom.uuid  
-    end
-
     # database relation 
     belongs_to :group, optional: true 
     belongs_to :sender, :class_name => 'User', optional: true 
@@ -38,5 +32,9 @@ class Invitation < ApplicationRecord
         else 
             email
         end 
+    end 
+
+    def invite
+        SendInvitationsJob.perform_later(id) 
     end 
 end
