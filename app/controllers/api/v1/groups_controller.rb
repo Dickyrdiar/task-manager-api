@@ -1,47 +1,31 @@
 class Api::V1::GroupsController < ApplicationController
-    before_action :authorize_request, except: [:index, :show]
-
+    before_action :authorize_request, except: [:index, :create, :show, :update, :destroy]
+   
     def index
-        @groups = Group.where(:user_id => current_user.id)
-        # render json: @groups
+        @groups = Group.where(:user_id => current_user)
     end 
 
     def show
-        @group = Group.find_by(params[:slug])
+        @group = Group.find(params[:id])
     end 
 
     def create
-        @group = Group.new(group_params.merge(owner: current_user))
-        
+        @group = Group.new(group_params)
+        @group.user = current_user
+
         if @group.save 
-            render json: {
-                messages: 'group create', 
-                is_messages: true, 
-                data: { group: @group }
-            }, status: :ok 
+            render :show, status: :ok
         else 
-            render json: {
-                messages: 'group failed', 
-                is_messages: false, 
-                data: {}
-            }, status: :failed 
+           render json: @group.errors, status: :unprocessable_entity
         end 
     end 
 
     def update 
         @group = Group.find(params[:id])
         if @group.save(group_params)
-            render json: {
-                messages: 'update success', 
-                is_message: true, 
-                data: { group: @group }
-            }, status: :ok 
+           render :show, status: :ok
         else
-            render json: {
-                messages: 'update failed', 
-                is_messages: false, 
-                data: {}
-            }, status: :failed 
+            render json: @group.erros, status: :unprocessable_entity
         end    
     end 
 
@@ -56,6 +40,7 @@ class Api::V1::GroupsController < ApplicationController
 
     def set_group 
         @group = Group.find(params[:id])
+        # authorize
     end 
 
     def group_params
