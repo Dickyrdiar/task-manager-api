@@ -2,7 +2,6 @@ class Api::V1::InvitationsController < ApplicationController
     def index
         @group = Group.find(params[:group_id])
         @invitations = Invitation.where(:group_id => @group.id)
-        # render json: @invitations
     end 
     
     def create
