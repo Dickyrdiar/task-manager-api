@@ -7,6 +7,9 @@ class User < ApplicationRecord
   has_many :notifications, as: :recipient
   has_many :invitations, :class_name => "Invitations", :foreign_key => "recipient_id "
   has_many :sent_invites, :class_name => "Invitations", :foreign_key => "sender_id"
+  has_many :groups
+
+  # belongs_to :group
 
   # role user 
   ROLE = {

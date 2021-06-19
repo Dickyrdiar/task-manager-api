@@ -2,8 +2,7 @@ class Api::Auth::UsersController < ApplicationController
     before_action :authorize_request, except: [:index, :create, :update, :destroy]
 
     def index
-        @users = User.all
-        render json: @users  
+        @users = User.all  
     end 
 
     def new
@@ -26,17 +25,9 @@ class Api::Auth::UsersController < ApplicationController
 
             render json: @user, status: :ok 
         elsif @user.save
-            render json: {
-                message: 'user create', 
-                is_message: true, 
-                data: { user: @user }
-            }, status: :ok
+            render :show, status: :created
         else
-            render json: {
-                messages: 'user failed', 
-                is_message: false, 
-                data: {}
-            }, status: :failed 
+            render json: @user.errors, status: :unproccessable_entity 
         end 
     end 
 
@@ -44,17 +35,9 @@ class Api::Auth::UsersController < ApplicationController
         @user = User.find(params[:id])
 
         if @user.update(user_params)
-            render json: {
-                message: 'user update', 
-                is_message: true, 
-                data: { user: @user }
-            }, status: :ok
+            render :show, status: :ok
         else  
-            render json: {
-                message: 'update failed', 
-                is_message: false, 
-                data: {}
-            }, status: :failed
+            render json: @user.errors, status: :unproccessable_entity
         end 
     end 
 
