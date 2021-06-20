@@ -1,9 +1,6 @@
 class InviteMailer < ApplicationMailer
-  default from: 'notificationexmpale@example.com'
-
-  def invite_email
-    @invitation = params[:invitation]
-    @url = 'http://localhost:3001'
-    # mail(:to => invitation.email, :subject => "welcome next to signup")
+  def user_invite(group_id, email)
+    @group = Group.find(group_id)
+    mail to: email, subject: "#{@invitation.email} send your link"
   end  
 end

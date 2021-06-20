@@ -36,6 +36,10 @@ class ApplicationController < ActionController::API
         @current_project ||= Project.find(session[:project_id]) if session[:project_id]
     end 
 
+    def current_group
+        @current_group ||= Group.find(session[:group_id]) if session[:group_id] 
+    end 
+
     private 
 
     def user_not_authorized

@@ -5,8 +5,9 @@ class Group < ApplicationRecord
     # database relation 
     has_many :projects
     has_many :invitations, dependent: :destroy
-    has_many :users, through: :group_members
-    belongs_to :owner, :class_name => "User"
+    # has_many :users, through: :invitations
+    belongs_to :user
+    # has_many :users
 
     extend FriendlyId
     friendly_id :name, use: :slugged
