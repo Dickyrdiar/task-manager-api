@@ -13,7 +13,6 @@ class Api::V1::MessagesController < ApplicationController
     def create
         @project = Project.find(params[:project_id])
         @message = @project.messages.create(message_params.merge(user: current_user))
-        p @message.errors.full_messages
         
         if @message.save
             ActionCable.server.broadcast "project_channel", content: @message.text
