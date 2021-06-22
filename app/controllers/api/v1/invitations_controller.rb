@@ -6,7 +6,7 @@ class Api::V1::InvitationsController < ApplicationController
     
     def create
         @group = Group.find(params[:group_id])
-        @invitation  = @group.invitations.create(invitation_params.merge(sender: current_user))
+        @invitation  = Invitation.new
         @invitation.user = current_user
         @invitation.group = current_group
     
@@ -15,11 +15,8 @@ class Api::V1::InvitationsController < ApplicationController
                 InviteMailer.existing_user_invite(@invitation).deliver 
                 @invitation.recipient.group.push(@invitation.group)
                 render :show, status: :ok
-
-                p @invitation.error.full_messages
             else 
-               InviteMailer.with(invitaiton: @invitation, :invitaiton_token => @invitation.token).invite_email.deliver
-                # InviteMailer.with(@invitation, new_user_registration_path(:invitation_token => @invitation.token)).deliver
+                InviteMailer.user_invite(invitation: @invitation.email).deliver
                 render :show, status: :ok
             end  
         else 
