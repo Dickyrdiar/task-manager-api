@@ -1,6 +1,8 @@
 class ProjectInviteMailer < ApplicationMailer
-    def projects_ivnites(project_invite_id, email)
-        @project_invite = ProjectInvite.find(project_invite_id)
-        mail to: email, subject: "#{@project_invite.email} send link to invite you to project"
+    def project_invites(project_invite)
+        @project_invite = project_invite
+        # @email = email
+       
+        mail(to: @email, subject: "project is for you")
     end 
 end

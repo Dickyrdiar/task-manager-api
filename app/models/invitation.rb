@@ -26,13 +26,10 @@ class Invitation < ApplicationRecord
     end 
 
     def check_user_existance 
-        existing_user = User.find_by(recipient_id)
-        if existing_user
-            p 'if masuk'
-            errors.add :recipient_id, 'is already a member'
-        else 
-            email
-        end 
+      recipient = User.find_by_email(email)
+      if recipient
+        self.recipient_id = recipient.id
+      end 
     end 
 
     after_create_commit { SendInviteEmailJob.perform_later(self) }
