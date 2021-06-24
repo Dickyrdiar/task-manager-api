@@ -1,9 +1,9 @@
 class Invitation < ApplicationRecord
     # database relation 
-    belongs_to :group, optional: true 
+    belongs_to :group
     belongs_to :sender, :class_name => 'User', optional: true 
     belongs_to :recipient, :class_name => 'User', optional: true
-    belongs_to :user
+    belongs_to :user, optional: true
 
     before_create :generate_token 
     before_save :check_user_existance 
