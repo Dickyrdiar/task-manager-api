@@ -6,18 +6,15 @@ class Api::V1::InvitationsController < ApplicationController
     
     def create
         @group = Group.find(params[:group_id])
-        @invitation  = Invitation.new
-        @invitation.user = current_user
-        @invitation.group = current_group
+        @invitation = @group.invitations.create(invitation_params.merge(sender: current_user))
+        @invitation.group_id = current_group
     
         if @invitation.save
             if @invitation.recipient != nil 
-                p 'invite succes'
                 InviteMailer.existing_user_invite(@invitation).deliver 
                 @invitation.recipient.group.push(@invitation.group)
                 render :show, status: :ok
             else 
-                p 'email send'
                 InviteMailer.user_invite(invitation: @invitation.email).deliver
                 render :show, status: :ok
             end  
@@ -26,11 +23,11 @@ class Api::V1::InvitationsController < ApplicationController
         end  
     end 
     
-    def leave
-        @group = Group.find(params[:id])
-        current_user.update_attribute(group_id: @group.id)
-        
-        render json: { message: 'you leave group' }
+    def destroy
+       @invitation = Invitation.find(params[:id])
+       @invitation.destroy 
+
+       render json: { messages: 'user has been delete' }
     end 
     
     private 
