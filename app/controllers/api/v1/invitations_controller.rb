@@ -12,10 +12,12 @@ class Api::V1::InvitationsController < ApplicationController
     
         if @invitation.save
             if @invitation.recipient != nil 
+                p 'invite succes'
                 InviteMailer.existing_user_invite(@invitation).deliver 
                 @invitation.recipient.group.push(@invitation.group)
                 render :show, status: :ok
             else 
+                p 'email send'
                 InviteMailer.user_invite(invitation: @invitation.email).deliver
                 render :show, status: :ok
             end  
