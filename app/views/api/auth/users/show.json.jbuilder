@@ -1,0 +1,1 @@
+json.extract! @user, :id, :username, :email, :direct_messages, :groups, :created_at, :updated_at
