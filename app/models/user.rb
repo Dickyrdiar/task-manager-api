@@ -8,13 +8,15 @@ class User < ApplicationRecord
   has_many :invitations, :class_name => "Invitations", :foreign_key => "recipient_id "
   has_many :sent_invites, :class_name => "Invitations", :foreign_key => "sender_id"
   has_many :groups
+  has_many :direct_messages
 
   # belongs_to :group
 
   # role user 
   ROLE = {
     owner: 'owner',
-    members: 'members'
+    members: 'members',
+    project_manager: 'PM'
   }
 
   # omniauth 

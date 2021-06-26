@@ -20,7 +20,7 @@ class RoomChannel < ApplicationCable::Channel
         Message.create!(
             conversation: convo, 
             sender: sender, 
-            content: message
+            content: direct_message
         )
     end 
 end 
