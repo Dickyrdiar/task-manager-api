@@ -2,8 +2,18 @@ class DirectMessageJob < ApplicationJob
   queue_as :default
 
   def perform(direct_message)
-    ActionCable.server.broadcast "user_#{direct_message.user}_channel", direct_message: 'MESSAGE HTML'
+    payload = {
+      room_id: direct_message.conversation.id, 
+      text: direct_message.text,
+      sender:direct_message.sender, 
+      participants: direct_message.conversation.user.collect(&:id) 
+    }
+    ActionCable.server.broadcast(buld_room_id(direct_message.conversation.id), payload)
   end
+
+  def build_room_id(id)
+    "ChatRoom-#{id}"
+  end 
 
   private 
 
