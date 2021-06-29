@@ -1,4 +1,6 @@
 class Api::Auth::DirectMessagesController < ApplicationController
+    before_action :authorize_request, except: [:index, :show, :create]
+
     def index
         @direct_messages = DirectMessage.where(user_id: current_user)
     end 
@@ -11,7 +13,7 @@ class Api::Auth::DirectMessagesController < ApplicationController
         @user = User.find(params[:user_id])
         @direct_message = @user.direct_messages.create(direct_messages_params.merge(user_id: current_user))
     
-        if @direct_message.save
+        if @direct_message.valid?
             ActionCable.server.broadcast "room_channel", content: @direct_message.text 
             render :show, status: :created
         else 
