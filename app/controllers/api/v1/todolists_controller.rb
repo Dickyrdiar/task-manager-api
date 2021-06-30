@@ -2,7 +2,6 @@ class Api::V1::TodolistsController < ApplicationController
   def index
     @project = Project.find(params[:project_id])
     @todolist = Todolist.where(project_id: @project.id)
-    # render json: @todolists
   end
 
   def create
@@ -10,7 +9,7 @@ class Api::V1::TodolistsController < ApplicationController
     @todolist = @project.todolists.create(todolist_params.merge(user: current_user)) 
 
     if @todolist.save 
-      render json: @todolist, status: :created 
+      render :show, status: :created 
     else 
       render json: @todolist.errors, status: :unproccessable_entity 
     end 

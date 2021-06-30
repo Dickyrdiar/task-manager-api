@@ -9,24 +9,22 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
 
-      get '/groups', to: 'groups#index'
+      # get '/groups', to: 'groups#index'
       resources :groups  do  
         resources :invitations
 
-        get '/projects', to: 'projects#index'
         resources :projects do
-          get '/messages', to: 'messages#index'
-          resource :messages
-          get '/todolists', to: 'todolists#index'
-          resource :todolists
+          resources :messages
+          resources :todolists
         end 
       end     
       mount ActionCable.server => '/cable'
     end  
 
     namespace :auth do
-      resource :sessions
-      resource :users
+      resources :sessions
+      resources :users 
+      resources :conversations
     end 
   end                                                                                                                                                                                       
 end
