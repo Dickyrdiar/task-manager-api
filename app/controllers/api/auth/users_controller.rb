@@ -1,5 +1,5 @@
 class Api::Auth::UsersController < ApplicationController
-    before_action :authorize_request, except: [:index, :create, :update, :destroy]
+    before_action :authorize_request, except: [:index, :show, :create, :update, :destroy]
 
     def index
         @users = User.all  
@@ -10,7 +10,7 @@ class Api::Auth::UsersController < ApplicationController
     end 
 
     def show
-        render json: @users, status: :ok 
+        @user = User.find(params[:id])
     end 
 
     def create
@@ -27,7 +27,7 @@ class Api::Auth::UsersController < ApplicationController
         elsif @user.save
             render :show, status: :created
         else
-            render json: @user.errors, status: :unproccessable_entity 
+            render json: @user.errors, status: :unproccessable_entity
         end 
     end 
 
@@ -50,6 +50,7 @@ class Api::Auth::UsersController < ApplicationController
     end 
 
     private  
+
 
     def set_user 
         @user = User.find(params[:id])

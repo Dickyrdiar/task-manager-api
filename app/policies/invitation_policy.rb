@@ -14,8 +14,7 @@ class InvitationPolicy <  ApplicationPolicy
         create? 
     end 
 
-    # def destroy
-    #     if @user.is_owner?
-    #         return  
-    # end 
+    def destroy
+       return true if @user.is_owner
+    end 
 end 
