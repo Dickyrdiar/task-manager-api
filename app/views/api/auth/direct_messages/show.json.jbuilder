@@ -1,1 +1,0 @@
-json.extract! @direct_message, :id, :text, :image, :user, :created_at

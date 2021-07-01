@@ -19,7 +19,7 @@ class ProjectChannel < ApplicationCable::Channel
     convo.users << sender unless convo.users.include?(sender)
 
     Message.create!(
-      conversation: convo, 
+      project: convo, 
       sender: sender, 
       content: message
     )

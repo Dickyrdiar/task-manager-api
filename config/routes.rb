@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       # get '/groups', to: 'groups#index'
       resources :groups  do  
         resources :invitations
+        resources :conversations
 
         resources :projects do
           resources :messages
@@ -24,7 +25,6 @@ Rails.application.routes.draw do
     namespace :auth do
       resources :sessions
       resources :users 
-      resources :conversations
     end 
   end                                                                                                                                                                                       
 end
