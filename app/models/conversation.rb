@@ -1,19 +1,19 @@
 class Conversation < ApplicationRecord
     # validates :author, uniquenes: {scope: :receiver}
 
-    belongs_to :author, class_name: 'User'
-    belongs_to :receiver, class_name: 'User'
-    has_many :direct_messages, -> {order(created_at: :asc)}, dependent: :destroy
+    belongs_to :author, class_name: 'User', foreign_key: "author_id"
+    belongs_to :receiver, class_name: 'User', foreign_key: "receiver_id"
+    has_many :direct_messages , dependent: :destroy
 
-    scope :participating, -> (user) do
-        where(author_id: sender_id, receiver_id: receiver_id).or(where(author_id: receiver_id, receiver_id: sender_id)).limit(1)
+    scope :betwen, -> (author_id, receiver_id) do
+        where("(conversations.author_id = ? AND conversations.receiver_id = ?) OR (conversations.receiver_id = ? AND conversations.author_id = ? ", author_id, receiver_id, author_id, receiver_id) 
     end 
 
-    def with(current_user)
-        author == current_user ? receiver : author
+    def recipient(current_user)
+        self.author_id == current_user.id ? self.receiver : self.author
     end 
 
-    def participates?(user)
-        author == user || receiver == user
+    def unread_direct_messages_count(current_user)
+        self.dirrect_messages.where("user_id != ? AND read = ?", current_user.id, false).count
     end
 end

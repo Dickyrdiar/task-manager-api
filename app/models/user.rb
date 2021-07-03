@@ -8,8 +8,9 @@ class User < ApplicationRecord
   has_many :invitations, :class_name => "Invitations", :foreign_key => "recipient_id "
   has_many :sent_invites, :class_name => "Invitations", :foreign_key => "sender_id"
   has_many :groups
-  has_many :direct_messages
-  # belongs_to :group
+  has_many :direct_messages, dependent: :destroy
+  has_many :authored_conversations, class_name: 'Conversation', foreign_key: 'author_id'
+  has_many :received_conversations, class_name: 'Conversation', foreign_key: 'received_id'
 
   # role user 
   ROLE = {
