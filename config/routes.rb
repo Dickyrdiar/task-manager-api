@@ -12,7 +12,9 @@ Rails.application.routes.draw do
       # get '/groups', to: 'groups#index'
       resources :groups  do  
         resources :invitations
-        resources :conversations
+        resources :conversations do 
+          resources :direct_messages
+        end
 
         resources :projects do
           resources :messages

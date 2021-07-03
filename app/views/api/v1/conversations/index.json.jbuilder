@@ -1,3 +1,3 @@
-json.array! @direct_message do |dm|
-    json.extract! dm, :id, :body 
+json.array! @conversations do |conv|
+    json.extract! conv, :id, :author, :receiver, :direct_messages 
 end 

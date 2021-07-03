@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :conversation do
-    recipient_id 1
-    sender 1
+    author_id 1
+    receiver_id 1
   end
 end
