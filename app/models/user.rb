@@ -9,7 +9,6 @@ class User < ApplicationRecord
   has_many :sent_invites, :class_name => "Invitations", :foreign_key => "sender_id"
   has_many :groups
   has_many :direct_messages
-
   # belongs_to :group
 
   # role user 

@@ -1,5 +1,5 @@
 class Api::V1::MessagesController < ApplicationController
-    before_action :authorize_request, except: [:index, :show, :create, :update, :destroy]
+    before_action :authorize_request, only: [:index, :create]
 
     def index
         @project = Project.find(params[:project_id])
