@@ -20,12 +20,12 @@ class Api::V1::ConversationsController < ApplicationController
         @conversation = Conversation.find(params[:id])
         @conversation.destroy 
         
-        render json { message: 'conversation destroy' }
+        render json: { message: 'conversation destroy' }, status: :unprocessable_entity
     end 
 
     private  
 
     def conversation_params
         params.permit(:author_id, :receiver_id)
-    end 
+    end   
 end 
