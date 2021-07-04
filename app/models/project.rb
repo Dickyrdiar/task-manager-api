@@ -11,12 +11,14 @@ class Project < ApplicationRecord
 
     # database relation 
     has_many :messages, dependent: :destroy  
-    belongs_to :group, optional: true 
     has_many :project_invites, dependent: :destroy
-    has_many :users, through: :project_members
-    belongs_to :user, optional: true
+    has_many :users, through: :project_room_users
     has_many :invitations
     has_many :todolists
+    has_many :project_room_users
+
+    belongs_to :group, optional: true 
+    belongs_to :user, optional: true
 
     extend FriendlyId
     friendly_id :name, use: :slugged
@@ -26,4 +28,10 @@ class Project < ApplicationRecord
 
     # mount_uploaders :image, ImageUploader
     has_one_attached :image
+
+    def unread_messages_count(current_user)
+        self.messages.where("user_id != ? AND read = ?", current_user.id, false)
+    end 
+
+
 end
