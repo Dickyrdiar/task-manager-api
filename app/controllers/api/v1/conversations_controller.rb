@@ -9,10 +9,18 @@ class Api::V1::ConversationsController < ApplicationController
     def create
         if Conversation.betwen(params[:author_id], params[:receiver_id]).present? 
             @conversation = Conversation.between(params[:author_id], params[:receiver_id]).first
+            @conversation.author = current_user
         else
             @conversation.create!(conversation_params) 
         end 
         render :show, status: :ok
+    end 
+
+    def destroy
+        @conversation = Conversation.find(params[:id])
+        @conversation.destroy 
+        
+        render json { message: 'conversation destroy' }
     end 
 
     private  

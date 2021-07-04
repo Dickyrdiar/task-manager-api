@@ -32,5 +32,9 @@ class Invitation < ApplicationRecord
       end 
     end 
 
+    def recipient
+      self.sender_id == current_user.id ? self.recipient : self.sender 
+    end 
+
     after_create_commit { SendInviteEmailJob.perform_later(self) }
 end

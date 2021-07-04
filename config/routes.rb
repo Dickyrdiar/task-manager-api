@@ -17,6 +17,7 @@ Rails.application.routes.draw do
         end
 
         resources :projects do
+          resources :project_room_users
           resources :messages
           resources :todolists
         end 
