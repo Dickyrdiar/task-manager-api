@@ -20,6 +20,8 @@ Rails.application.routes.draw do
           resources :project_room_users
           resources :messages
           resources :todolists
+
+          post '/messages/:id/project_room_users/:id' => 'messages#create'
         end 
       end     
       mount ActionCable.server => '/cable'

@@ -10,12 +10,12 @@ class Project < ApplicationRecord
     validates_presence_of :name, :desc, :date_begining
 
     # database relation 
-    has_many :messages, dependent: :destroy  
+    # has_many :messages, dependent: :destroy  
     has_many :project_invites, dependent: :destroy
-    has_many :users, through: :project_room_users
+    has_many :users
     has_many :invitations
     has_many :todolists
-    has_many :project_room_users
+    has_many :messages
 
     belongs_to :group, optional: true 
     belongs_to :user, optional: true
