@@ -10,7 +10,6 @@ class Message < ApplicationRecord
     belongs_to :project
     belongs_to :user
 
-
     # testing 
     after_create_commit { MessageBroadcastJob.perform_later(self) }
     has_one_attached :image

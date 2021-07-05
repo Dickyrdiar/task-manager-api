@@ -1,0 +1,1 @@
+json.extract! @project_room_users, :id, :project, :message
