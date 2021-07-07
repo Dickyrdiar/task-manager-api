@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :direct_messages, dependent: :destroy
   has_many :authored_conversations, class_name: 'Conversation', foreign_key: 'author_id'
   has_many :received_conversations, class_name: 'Conversation', foreign_key: 'received_id'
-  has_many :notifications
+  has_many :notifications, as: :recipient
 
   # role user 
   ROLE = {
@@ -30,6 +30,10 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0, 20]
     end 
   end 
+
+  def unviewed_notifications_count
+    Notification.for_user(self.id) 
+  end
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
