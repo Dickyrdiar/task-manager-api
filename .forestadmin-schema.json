@@ -488,6 +488,21 @@
       "relationship": "BelongsTo",
       "widget": null,
       "validations": []
+    }, {
+      "field": "read",
+      "type": "Boolean",
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": true,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": null,
+      "inverse_of": null,
+      "widget": null,
+      "validations": []
     }],
     "segments": [],
     "actions": []
@@ -12096,22 +12111,6 @@
       "is_virtual": false,
       "reference": "Conversation.id",
       "inverse_of": null,
-      "relationship": "HasMany",
-      "widget": null,
-      "validations": []
-    }, {
-      "field": "project_room_users",
-      "type": ["Number"],
-      "default_value": null,
-      "enums": null,
-      "integration": null,
-      "is_filterable": false,
-      "is_read_only": false,
-      "is_required": false,
-      "is_sortable": true,
-      "is_virtual": false,
-      "reference": "ProjectRoomUser.id",
-      "inverse_of": "user",
       "relationship": "HasMany",
       "widget": null,
       "validations": []

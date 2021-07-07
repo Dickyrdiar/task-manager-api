@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     end  
 
     namespace :auth do
+      resources :notifications
       resources :sessions
       resources :users 
     end 
