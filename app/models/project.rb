@@ -7,7 +7,9 @@ class Project < ApplicationRecord
     end 
 
     # validates 
-    validates_presence_of :name, :desc, :date_begining
+		validates :name, presence: true 
+		validates :desc, presence: true 
+		validates :date_begining, presence: true 
 
     # database relation 
     # has_many :messages, dependent: :destroy  
@@ -32,6 +34,4 @@ class Project < ApplicationRecord
     def unread_messages_count(current_user)
         self.messages.where("user_id != ? AND read = ?", current_user.id, false)
     end 
-
-
 end

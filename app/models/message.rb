@@ -6,6 +6,9 @@ class Message < ApplicationRecord
         } 
     end 
 
+		# validates 
+		validates :text, presence: true
+
     # database relation 
     belongs_to :project
     belongs_to :user
