@@ -1,6 +1,7 @@
 class Group < ApplicationRecord
     # uuid 
-    validates_presence_of :name, :desc
+		validates :name, presence: true 
+		validates :desc, presence: true
 
     # database relation 
     has_many :projects

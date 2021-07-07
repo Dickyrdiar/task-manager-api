@@ -1,6 +1,6 @@
 class Api::V1::ProjectsController < ApplicationController
     before_action :authorize_request, except: [:index, :show, :create, :update, :destroy]
-    # before_action :set_project, only: [:show, :update, :destroy]
+    before_action :set_project, only: [:show, :update, :destroy]
 
     def index
         @group = Group.find(params[:group_id])
@@ -55,7 +55,7 @@ class Api::V1::ProjectsController < ApplicationController
 
     def set_project
         @project = Project.find(params[:id]) 
-        # authorize [:user, @project]
+        authorize [:user, @project]
     end 
 
     def project_params
