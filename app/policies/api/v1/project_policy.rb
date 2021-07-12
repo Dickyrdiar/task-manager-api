@@ -1,37 +1,20 @@
 class ProjectPolicy <  ApplicationPolicy
-    attr_reader :user, :record 
+    attr_reader :user, :project 
 
-    def initialize(user, record)
+    def initialize(user, project)
         @user = user 
-        @record = record 
+        @project = project
     end 
 
-    def index
-        return true if @user.is_owner? 
-        return true if @user.is_members?   
+    def create?
+        return true if @user.role == "owner"
     end 
 
-    def show?
-        index?
-    end 
-    
-    def create? 
-        return true if @user.is_owner?  
-    end 
-
-    def new?
-        create?  
-    end 
-
-    def update? 
+    def update?
         create? 
     end 
 
-    def edit? 
-        create? 
-    end 
-
-    def destroy? 
-        create? 
+    def destroy 
+        return true if @user.role == "owner"
     end 
 end 

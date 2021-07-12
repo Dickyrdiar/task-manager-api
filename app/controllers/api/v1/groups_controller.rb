@@ -1,6 +1,7 @@
 class Api::V1::GroupsController < ApplicationController
-    before_action :authorize_request, except: [:index, :create, :show, :update, :destroy]
-   
+    before_action :authorize_request, except: [:index, :create, :show]
+    # before_action :set_group, except: %i[ show update destroy ]
+
     def index
         @groups = Group.where(:user_id => current_user)
     end 
@@ -12,6 +13,7 @@ class Api::V1::GroupsController < ApplicationController
     def create
         @group = Group.new(group_params)
         @group.user = current_user
+        authorize @group
 
         if @group.save 
             render :show, status: :ok
@@ -22,6 +24,8 @@ class Api::V1::GroupsController < ApplicationController
 
     def update 
         @group = Group.find(params[:id])
+        authorize @group
+
         if @group.save(group_params)
            render :show, status: :ok
         else
@@ -32,6 +36,7 @@ class Api::V1::GroupsController < ApplicationController
     def destroy 
         @group = Group.find(params[:id])
         @group.destroy 
+        authorize @group
 
         render json: { messages: 'group success delete' }
     end 
@@ -40,7 +45,6 @@ class Api::V1::GroupsController < ApplicationController
 
     def set_group 
         @group = Group.find(params[:id])
-        # authorize
     end 
 
     def group_params

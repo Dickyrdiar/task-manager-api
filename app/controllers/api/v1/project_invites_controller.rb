@@ -1,4 +1,7 @@
 class Api::V1::ProjectInvitesController < ApplicationController
+    before_action :authorize_request, except: [:show, :create]
+    before_action :set_project_invites, except: [:destroy]
+
     def show
         @project = Project.find(params[:project_id])
         @project_invites = ProjectInvite.where(:project_id => @project.id) 
@@ -26,7 +29,16 @@ class Api::V1::ProjectInvitesController < ApplicationController
         end 
     end 
 
+    def destroy 
+        @project_invite = ProjectInvite.find(params[:id])
+        @project_invite.destroy  
+
+        render json: { message: 'user is destroy' }
     private 
+
+    def set_project_invites
+
+    end 
 
     def project_invite_params
         params.permit(:project_id, :email, :recipient_id)

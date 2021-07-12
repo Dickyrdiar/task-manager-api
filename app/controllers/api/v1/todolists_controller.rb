@@ -1,4 +1,7 @@
 class Api::V1::TodolistsController < ApplicationController
+  before_action :authorize_request, except: [:index, :create]
+  before_action :set_todolist,  except: [:show, :update, :destroy]
+
   def index
     @project = Project.find(params[:project_id])
     @todolist = Todolist.where(project_id: @project.id)
@@ -35,6 +38,7 @@ class Api::V1::TodolistsController < ApplicationController
   private  
   def set_todolist
     @todolist = Todolist.find(params[:id]) 
+    authorize @todolist
   end 
 
   def todolist_params

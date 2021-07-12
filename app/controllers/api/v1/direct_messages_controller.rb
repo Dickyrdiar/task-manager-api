@@ -1,7 +1,7 @@
 class Api::V1::DirectMessagesController < ApplicationController
     before_action :authorize_request, except: [:index, :show, :create]
     before_action :find_conversation!
-    before_action :set_direct_message, only: [:destroy]
+    before_action :set_direct_message, only: [:create, :destroy]
 
     def index 
         @conversation.direct_messages.where("user_id != ? AND read = ?", current_user.id, false).update_all(read: true)
@@ -31,6 +31,7 @@ class Api::V1::DirectMessagesController < ApplicationController
 
     def set_direct_message
         @direct_message = DirectMessage.find(params[:id]) 
+        authorize @direct_message
     end 
 
     def direct_message_params
