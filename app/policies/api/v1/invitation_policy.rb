@@ -1,20 +1,11 @@
 class InvitationPolicy <  ApplicationPolicy
-    attr_reader :user, :record 
+    attr_reader :user, :invitation 
 
-    def initialize(user, record)
-        @user = user 
-        @record = record
+    def create?
+        return true if @user.role == "owner" 
     end 
 
-    def create? 
-        return true if @user.is_owner?
-    end 
-
-    def update? 
-        create? 
-    end 
-
-    def destroy
-       return true if @user.is_owner
-    end 
+    def destroy?
+        create?
+    end
 end 

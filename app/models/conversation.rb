@@ -3,6 +3,7 @@ class Conversation < ApplicationRecord
 
     belongs_to :author, class_name: 'User', foreign_key: "author_id"
     belongs_to :receiver, class_name: 'User', foreign_key: "receiver_id"
+    belongs_to :group 
     has_many :direct_messages , dependent: :destroy
 
     scope :betwen, -> (author_id, receiver_id) do

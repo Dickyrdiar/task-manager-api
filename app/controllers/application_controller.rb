@@ -1,12 +1,11 @@
 class ApplicationController < ActionController::API
-    # include pundit
+    include Pundit
+
     def protect_againts_forgery?
         false 
     end 
 
-    def pundit_user
-        AuthorizationContext.new(current_user, current_project) 
-    end 
+    rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized 
 
     def not_found
         render json: { error: 'not_found' }
@@ -21,9 +20,9 @@ class ApplicationController < ActionController::API
             @current_user = User.find(@decode[:user_id])
            
         rescue ActiveRecord::RecordNotFound => e   
-            render json: { messages: 'you need login or signup' }, status: :unauthorized
+            render json: { errors: e.message }, status: :unauthorized
         rescue JWT::DecodeError => e 
-            render json: { messages: 'you need login or signup' }, status: :unauthorized
+            render json: { errors: e.message }, status: :unauthorized
         end
     end 
 
@@ -43,7 +42,7 @@ class ApplicationController < ActionController::API
     private 
 
     def user_not_authorized
-        flash[:warning] = "You are not authorized to perform this action."
+        # flash[:alert] = "You are not authorized to perform this action."
         redirect_to(request.referrer || root_path)
     end
 end

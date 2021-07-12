@@ -1,24 +1,16 @@
 class ProjectInvitePolicy < ApplicationPolicy
-    attr_reader :user, :record 
+    attr_reader :user, :project_invite 
 
-    def initialize(user, record)
-        @user = user 
-        @record = record
+    def create?
+        return true if @user.role == "owner"
+        return true if @user.role == "member"
     end 
 
-    def index
-        return true if @user.is_owner? 
-    end 
-
-    def show 
-        index?
-    end 
-
-    def new? 
+    def show? 
         create? 
     end 
 
-    def create?
-        return true if @user.is_owner? 
-    end 
+    def destroy? 
+        create?
+    end
 end 

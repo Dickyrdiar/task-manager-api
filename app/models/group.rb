@@ -6,6 +6,7 @@ class Group < ApplicationRecord
     # database relation 
     has_many :projects
     has_many :invitations, dependent: :destroy
+    has_many :conversations
     # has_many :users, through: :invitations
     belongs_to :user
     # has_many :users

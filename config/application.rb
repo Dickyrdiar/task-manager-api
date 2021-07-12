@@ -1,5 +1,6 @@
 require_relative 'boot'
 
+require "pundit"
 require "rails"
 require "devise"
 require "searchkick"

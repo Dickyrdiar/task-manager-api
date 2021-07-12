@@ -1,6 +1,6 @@
 class Api::V1::MessagesController < ApplicationController
     before_action :authorize_request, except: [:index, :create]
-    before_action :find_project!
+    before_action :find_project!, except: [:destroy]
 
     def index
         @project = Project.find(params[:project_id])
@@ -38,6 +38,7 @@ class Api::V1::MessagesController < ApplicationController
 
     def find_project!
         @project = Project.find(params[:project_id])
+        authorize @message
     end 
 
     def message_params 
