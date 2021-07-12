@@ -1,6 +1,5 @@
 require_relative 'boot'
 
-require 'rpush'
 require "rails"
 require "devise"
 require "searchkick"

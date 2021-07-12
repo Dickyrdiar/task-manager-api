@@ -1,10 +1,9 @@
 class Api::V1::ProjectsController < ApplicationController
-    before_action :authorize_request, except: [:index, :show, :create, :update, :destroy]
-    before_action :set_project, only: [:show, :update, :destroy]
+    before_action :authorize_request, except: [:index, :show, :create, :update]
+    # before_action :set_project, only: [:show, :update, :destroy]
 
     def index
         @group = Group.find(params[:group_id])
-        # authorize @user
         
         if params[:search].present? 
             @projects = Project.search(params[:search])
@@ -17,25 +16,22 @@ class Api::V1::ProjectsController < ApplicationController
         @project = Project.find(params[:id])
     end
    
-    def new
-        @project = Project.new
-    end 
     
     def create
         @group = Group.find(params[:group_id])
         @project = @group.projects.create(project_params.merge(user: current_user))
-        @project.user = current_user
+        authorize @project
 
-        if @project.save
-           render :show, status: :ok 
+        if @project.valid? 
+           render :show, status: :created
         else 
-           render json: @group.errors, status: :unproccessable_entity
+            render json: @group.errors, status: :unproccessable_entity
         end 
     end 
 
     def update 
         @project = Project.find(params[:id])
-        # authorize @user
+        authorize @project
 
         if @project.update(project_params)
             render :show, status: :ok
@@ -47,6 +43,7 @@ class Api::V1::ProjectsController < ApplicationController
     def destroy
         @project = Project.find(params[:id])
         @project.destroy 
+        authorize @project
 
         render json: { messages: 'project destroy success' }
     end 
@@ -55,7 +52,6 @@ class Api::V1::ProjectsController < ApplicationController
 
     def set_project
         @project = Project.find(params[:id]) 
-        authorize [:user, @project]
     end 
 
     def project_params

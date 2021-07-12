@@ -29,7 +29,6 @@ gem "figaro"
 gem 'tire', '~> 0.6.2'
 gem 'sidekiq'
 gem 'fcm'
-gem 'rpush'
 gem 'pundit'
 gem 'elasticsearch'
 gem 'searchkick'
