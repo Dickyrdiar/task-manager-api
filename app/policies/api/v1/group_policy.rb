@@ -1,39 +1,20 @@
 class GroupPolicy < ApplicationPolicy
-    attr_reader :user, :record 
+    attr_reader :user, :group
 
-    def initialize(user, record)
+    def initialize(user, group)
         @user = user 
-        @record = record
+        @group = group 
     end 
 
-    def index
-        return true if @user.is_owner?
-        return true if @user.is_members? 
-    end 
-
-    def show?  
-        index? 
-    end 
-
-    def create? 
-        index?
-    end
-    
-    def new? 
-        create? 
+    def create?
+        return true if @user.role == "owner" 
     end 
 
     def update? 
+        create?
+    end  
+
+    def destroy?
         create? 
-    end 
-
-    def edit? 
-        create?   
-    end 
-
-    def destroy? 
-        if @user.is_owner? 
-            true if @record.group_empty? 
-        end 
     end 
 end 
