@@ -36,11 +36,8 @@ class Api::V1::ProjectInvitesController < ApplicationController
         render json: { message: 'user is destroy' }
     private 
 
-    def set_project_invites
-
-    end 
-
     def project_invite_params
         params.permit(:project_id, :email, :recipient_id)
     end 
+end 
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_08_151116) do
+ActiveRecord::Schema.define(version: 2021_07_18_112436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,13 +36,29 @@ ActiveRecord::Schema.define(version: 2021_07_08_151116) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "admins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "username"
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_admins_on_username", unique: true
+  end
+
   create_table "conversations", force: :cascade do |t|
     t.integer "author_id"
     t.integer "receiver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "group_id"
     t.index ["author_id", "receiver_id"], name: "index_conversations_on_author_id_and_receiver_id", unique: true
     t.index ["author_id"], name: "index_conversations_on_author_id"
+    t.index ["group_id"], name: "index_conversations_on_group_id"
     t.index ["receiver_id"], name: "index_conversations_on_receiver_id"
   end
 

@@ -10,7 +10,7 @@ class Api::V1::InvitationsController < ApplicationController
         @invitation.group_id = current_group
     
         if @invitation.save
-            if @invitation.recipient != nil 
+            if @invitation.recipient_id != nil 
                 InviteMailer.existing_user_invite(@invitation).deliver 
                 @invitation.recipient.group.push(@invitation.group)
                 render :show, status: :ok
@@ -24,10 +24,10 @@ class Api::V1::InvitationsController < ApplicationController
     end 
     
     def destroy
-       @invitation = Invitation.find(params[:id])
-       @invitation.destroy 
+      @invitation = Invitation.find(params[:invitation_id])
+      @invitation.delete 
 
-       render json: { messages: 'user has been delete' }
+      render json: { message: 'user has been delete' }
     end 
     
     private 
