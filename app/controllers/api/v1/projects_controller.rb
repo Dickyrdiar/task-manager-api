@@ -10,6 +10,7 @@ class Api::V1::ProjectsController < ApplicationController
         else  
             @projects = Project.where(:group_id => @group.id)
         end 
+        # require_params
     end
 
     def show 
@@ -46,6 +47,13 @@ class Api::V1::ProjectsController < ApplicationController
     end 
 
     private  
+
+    def require_params
+        raise Pundit::NotAuthorizedError if params[:project_id].blank?
+        
+        @project = Project.find_by slug: params[:project_id]
+        raise Pundit::NotAuthorizedError unless @project
+    end 
 
     def set_project
         @project = Project.find(params[:id]) 

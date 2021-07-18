@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  devise_for :admins
   mount Sidekiq::Web => '/sidekiq'
   mount ForestLiana::Engine => '/forest'
   devise_for :users, :controllers => { :omniauth_callbacks => "api/auth/omniauth_callbacks" }
@@ -31,6 +32,12 @@ Rails.application.routes.draw do
       resources :notifications
       resources :sessions
       resources :users 
+    end 
+
+    namespace :admin do 
+      resources :admins
+      resources :sessions
+      
     end 
   end                                                                                                                                                                                       
 end

@@ -32,7 +32,7 @@ class Invitation < ApplicationRecord
       end 
     end 
 
-    def recipient
+    def recipient(current_user)
       self.sender_id == current_user.id ? self.recipient : self.sender 
     end 
 
