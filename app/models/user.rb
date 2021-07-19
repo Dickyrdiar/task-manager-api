@@ -21,15 +21,25 @@ class User < ApplicationRecord
   }
 
   # omniauth 
-  def self.from_omniauth 
-    where(provider: auth.provider, uid: auth.udi).first_or_create do |user| 
-      user.provider = auth.provider 
-      user.uid = auth.uid 
-      user.email = auth.info.email 
-      user.username = auth.info.username
-      user.password = Devise.friendly_token[0, 20]
+  # def self.create_user_for_google(auth)
+  #   where(provider: auth.provider, uid: auth.uid).first_or_create do |user| 
+  #     user.provider = 'google_oauth2' 
+  #     user.uid = auth.uid 
+  #     user.email = auth.info.email 
+  #     user.username = auth.info.username
+  #     user.password = Devise.friendly_token[0, 20]
+  #   end 
+  # end 
+
+  def self.create_user_for_google(data)
+    where(uid: data["email"]).first_or_initialize.tap do |user|
+      user.provider = 'google_oauth2'
+      user.uid = data["email"]
+      user.email = data["email"]
+      user.password=Devise.friendly_token[0,20]
+      user.save! 
     end 
-  end 
+  end
 
   def unviewed_notifications_count
     Notification.for_user(self.id) 
