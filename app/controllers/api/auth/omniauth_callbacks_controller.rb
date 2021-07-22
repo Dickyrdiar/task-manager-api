@@ -1,34 +1,15 @@
+require 'httparty'
+require 'json'
 class ::Api::Auth::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  respond_to :json
+  include HTTParty 
 
-  def github
-    @user = User.create_from_github_data(request.env['omniauth.auth'])
-    
-    if @user.persisted? 
-      sign_in_and_redirect
-      set_flash_message(:notice, :success, kind: 'Github') if navigational_format
-    else 
-      flash[:error] = 'there waas a problem signin pleas register'
-      render json:  @user.errors, status: :unproccessable_entity
-    end 
-  end 
+  def google_oauth2 
+    url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=#{params["id_token"]}"
+    response = HTTParty.get(url)
+    @user = User.create_user_for_google(response.parsed_response)
+    tokens = @user.create_new_auth_token
+    @user.save 
 
-  def google_oauth2
-    @user = User.from_omniauth(request.env['omniauth.auth'])
-    if @user.persisted?
-      flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Google'
-      sign_in_and_redirect user, event: :authentication
-    else
-      session['devise.google_data'] = request.env['omniauth.auth'].except(:extra)
-      params[:error] = :account_not_found 
-      do_failure_things
-    end
-  end 
-
-  # def twitter 
-  # end 
-
-  def failure
-    
+    rense json: @user
   end 
 end

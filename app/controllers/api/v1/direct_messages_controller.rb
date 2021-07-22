@@ -1,24 +1,27 @@
 class Api::V1::DirectMessagesController < ApplicationController
     before_action :authorize_request, except: [:index, :show, :create]
-    before_action :find_conversation!
-    before_action :set_direct_message, only: [:create, :destroy]
+    # before_action :find_conversation!
+    # before_action :set_direct_message, only: [:create, :destroy]
 
     def index 
-        @conversation.direct_messages.where("user_id != ? AND read = ?", current_user.id, false).update_all(read: true)
-        direct_messages = @conversation.direct_messages.new 
+        @direct_messages = DirectMessage.where("author_id = ? OR receiver_id = ?", current_user.id, current_user.id)
+        @users = User.where.not(id: current_user.id)
     end 
 
     def new 
     end 
 
     def create
-        @direct_message = @conversation.direct_messages.new(direct_message_params)
-        @direct_message.user = current_user
-        
+        @direct_message = @conversation.direct_messages.new(direct_message_params.merge(:user_id => current_user))
+        request.remote_ip
+
         if @direct_message.save
             ActionCable.server.broadcast "room_channel", { conversation_id: @conversation.id }
             render :show, status: :created 
+        else 
+            render json: @direct_message.errors, status: :unproccessable_entity
         end 
+       
     end 
 
     def destroy 
@@ -38,7 +41,7 @@ class Api::V1::DirectMessagesController < ApplicationController
         params.require(:direct_message).permit(:body) 
     end 
 
-    def find_conversation!
-       @conversation = Conversation.find(params[:conversation_id])
-    end 
+    # def find_conversation!
+    #    @conversation = Conversation.find(params[:conversation_id])
+    # end 
 end
