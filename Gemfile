@@ -38,6 +38,7 @@ gem 'rolify'
 gem 'sidekiq'
 gem 'figaro'
 gem 'pony', '~> 1.13', '>= 1.13.1'
+gem 'geocoder'
 
 # omniauth
 gem 'omniauth-oauth2', '~> 1.4'

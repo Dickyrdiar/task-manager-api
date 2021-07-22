@@ -1,5 +1,5 @@
 class Api::V1::ConversationsController < ApplicationController
-    before_action :authorize_request, except: [:index, :create]
+    before_action :authorize_request, except: [:index, :create, :show]
     # before_action :set_conversation, except: [:show, :destroy]
    
     def index
@@ -8,6 +8,7 @@ class Api::V1::ConversationsController < ApplicationController
     end 
 
     def show 
+        @conversation = Conversation.find(params[:id])
     end 
 
     def create

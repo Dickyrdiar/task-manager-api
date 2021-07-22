@@ -1,0 +1,1 @@
+json.extract! @conversation, :id, :author, :receiver, :direct_messages, :created_at, :updated_at

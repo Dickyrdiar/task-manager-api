@@ -32,6 +32,9 @@ Rails.application.routes.draw do
       resources :notifications
       resources :sessions
       resources :users 
+
+      post '/google_oauth2', to: 'sessions#google_oauth2'
+      delete '/sign_out' => 'sessions#destroy'
     end 
 
     namespace :admin do 
