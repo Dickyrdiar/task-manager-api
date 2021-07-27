@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "api/auth/omniauth_callbacks" }
   get '/notification/notify' => 'notification#notify'
 
-  namespace :api do
+  namespace :api, defaults: { format: :json } do
     namespace :v1 do
 
       # get '/groups', to: 'groups#index'
@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
     namespace :auth do
       resources :notifications
-      resources :sessions
+      resources :sessions, only: %i[create destroy]
       resources :users 
 
       post '/google_oauth2', to: 'sessions#google_oauth2'
@@ -39,8 +39,10 @@ Rails.application.routes.draw do
 
     namespace :admin do 
       resources :admins
-      resources :sessions
-      
+      resources :sessions, only: %i[create destroy]
+      resources :admin_groups do 
+        resources :admin_projects
+      end 
     end 
   end                                                                                                                                                                                       
 end
